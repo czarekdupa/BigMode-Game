@@ -1,47 +1,50 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=6 format=3 uid="uid://deapctpalo6mk"]
-=======
-[gd_scene load_steps=6 format=3 uid="uid://c5aw481euvm70"]
->>>>>>> Stashed changes
+[gd_scene load_steps=6 format=3 uid="uid://b7jovc0fgr5ph"]
 
-[ext_resource type="Script" path="res://Enemies/fire_boss.gd" id="1_kudw4"]
-[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_udbo5"]
+[ext_resource type="Script" path="res://Enemies/fire_boss.gd" id="1_6kar8"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_a7dnu"]
-radius = 127.566
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p46e4"]
+load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fm7hr"]
-radius = 1142.09
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmfhk"]
+size = Vector2(120, 120)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5b5ly"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_oxsac"]
+radius = 813.553
 
-[node name="FireBoss" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke1xy"]
+size = Vector2(122, 122)
+
+[node name="Fire_Boss" type="CharacterBody2D" groups=["enemy"]]
+modulate = Color(0.148154, 0.846206, 0.343162, 1)
+light_mask = 4
 collision_layer = 4
 motion_mode = 1
-script = ExtResource("1_kudw4")
-<<<<<<< Updated upstream
-=======
-hp = null
->>>>>>> Stashed changes
+script = ExtResource("1_6kar8")
+hp = 10
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.647059, 0.137255, 0.0980392, 1)
-rotation = 3.14159
-scale = Vector2(2, 2)
-texture = ExtResource("2_udbo5")
+texture = SubResource("CompressedTexture2D_p46e4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_a7dnu")
+visible = false
+shape = SubResource("RectangleShape2D_pmfhk")
 
-[node name="detection_area" type="Area2D" parent="."]
+[node name="Detection Area" type="Area2D" parent="."]
+collision_layer = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
-shape = SubResource("CircleShape2D_fm7hr")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detection Area"]
+shape = SubResource("CircleShape2D_oxsac")
+debug_color = Color(0.92549, 0.180392, 0.52549, 0.129412)
 
-[node name="hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-shape = SubResource("CircleShape2D_5b5ly")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_ke1xy")
 
-[connection signal="area_entered" from="detection_area" to="." method="_on_detection_area_area_entered"]
-[connection signal="area_exited" from="detection_area" to="." method="_on_detection_area_area_exited"]
+[node name="Fire_Boss" type="Node2D" parent="."]
+
+[connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Detection Area" to="." method="_on_detection_area_body_exited"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

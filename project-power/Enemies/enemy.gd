@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var hp : = 100
+@export var hp : = 10
 @export var knockback_cooldown: = 0.2
 const SPEED = 300
 const JUMP_VELOCITY = -400.0
@@ -10,7 +10,7 @@ var player: CharacterBody2D
 var player_global_position : Vector2
 var is_knocking: bool
 var knockback_power: float
-
+var original_color =  get_modulate()
 
 func _physics_process(delta: float) -> void:
 	if player:
@@ -47,11 +47,10 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	_knockback_Cooldown(knockback_cooldown)
 	
 	hp -= 1
+	set_modulate("red")
+	await get_tree().create_timer(0.2).timeout
 	if hp <= 0:
 		queue_free()
-	var original_color =  get_modulate()
-	set_modulate("red")
-	#await get_tree().create_timer(0.2).timeout
 	set_modulate(original_color)
 	
 func _knockback_Cooldown(time: float):
