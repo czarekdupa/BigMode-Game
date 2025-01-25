@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://faafyhoulqfw"]
+[gd_scene load_steps=3 format=3 uid="uid://faafyhoulqfw"]
 
 [ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_7w5u7"]
 [ext_resource type="PackedScene" uid="uid://t4hws5kroee5" path="res://Enemies/enemy.tscn" id="2_bgjuh"]
-[ext_resource type="PackedScene" uid="uid://bqxadeoevns0t" path="res://Enemies/Fire_Boss.tscn" id="3_ig1au"]
 
 [node name="CzarekTestLevel" type="Node2D"]
 
@@ -14,5 +13,3 @@ collision_mask = 1
 modulate = Color(1, 1, 1, 1)
 light_mask = 1
 position = Vector2(219, 101)
-
-[node name="FireBoss" parent="." instance=ExtResource("3_ig1au")]
