@@ -2,11 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_7w5u7"]
 [ext_resource type="PackedScene" uid="uid://t4hws5kroee5" path="res://Enemies/enemy.tscn" id="2_bgjuh"]
-<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://bqxadeoevns0t" path="res://Enemies/Fire_Boss.tscn" id="3_ig1au"]
-=======
-[ext_resource type="PackedScene" uid="uid://c5aw481euvm70" path="res://Enemies/Fire_Boss.tscn" id="3_ig1au"]
->>>>>>> Stashed changes
 
 [node name="CzarekTestLevel" type="Node2D"]
 
@@ -20,8 +16,3 @@ light_mask = 1
 position = Vector2(219, 101)
 
 [node name="FireBoss" parent="." instance=ExtResource("3_ig1au")]
-<<<<<<< Updated upstream
-=======
-position = Vector2(1038, 143)
-hp = null
->>>>>>> Stashed changes
