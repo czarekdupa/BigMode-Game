@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://t4hws5kroee5"]
+[gd_scene load_steps=6 format=3 uid="uid://t4hws5kroee5"]
 
 [ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_ul33b"]
 [ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_epwwa"]
@@ -9,24 +9,35 @@ size = Vector2(120, 120)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ku56n"]
 radius = 360.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ebxik"]
+size = Vector2(122, 122)
+
 [node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+modulate = Color(0.148154, 0.846206, 0.343162, 1)
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_ul33b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-self_modulate = Color(0, 0.662745, 0.0980392, 1)
 texture = ExtResource("2_epwwa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("RectangleShape2D_gjogx")
 
 [node name="Detection Area" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection Area"]
 shape = SubResource("CircleShape2D_ku56n")
 debug_color = Color(0.92549, 0.180392, 0.52549, 0.129412)
 
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_ebxik")
+
 [connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection Area" to="." method="_on_detection_area_body_exited"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]

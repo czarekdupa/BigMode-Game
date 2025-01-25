@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var hp : = 3
 const SPEED = 300
 const JUMP_VELOCITY = -400.0
 var movement_direction : Vector2
@@ -26,3 +27,10 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 		can_move = false
 	else:
 		pass
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	hp -= 1
+	set_modulate("red")
+	if hp <= 0:
+		queue_free()
