@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Project Power"
-run/main_scene="res://Player/player.tscn"
+run/main_scene="res://Levels/Czarek_Test_Level.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
@@ -60,6 +60,7 @@ jump={
 [layer_names]
 
 2d_physics/layer_1="Player"
+2d_physics/layer_2="glove"
 2d_physics/layer_3="enemy"
 
 [rendering]

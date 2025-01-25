@@ -49,6 +49,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_6vd06")
 
@@ -71,6 +72,7 @@ modulate = Color(0.93986, 0, 0.1428, 1)
 texture = ExtResource("2_qu2qp")
 
 [node name="Area2D" type="Area2D" parent="Right_Glove_Position/RightGlove"]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Glove_Position/RightGlove/Area2D"]
 shape = SubResource("CapsuleShape2D_wxdx5")
@@ -86,12 +88,14 @@ rotation = 0.523599
 scale = Vector2(0.845, 0.845)
 
 [node name="LeftGlove" type="Sprite2D" parent="Left_Glove_Position"]
+script = ExtResource("3_2k27e")
 
 [node name="Sprite2D" type="Sprite2D" parent="Left_Glove_Position/LeftGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
 texture = ExtResource("2_qu2qp")
 
 [node name="Area2D" type="Area2D" parent="Left_Glove_Position/LeftGlove"]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Glove_Position/LeftGlove/Area2D"]
 shape = SubResource("CapsuleShape2D_wxdx5")

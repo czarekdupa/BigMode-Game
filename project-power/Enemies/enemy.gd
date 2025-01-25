@@ -9,9 +9,13 @@ var player_global_position : Vector2
 
 
 func _physics_process(delta: float) -> void:
+	print(can_move)
 	look_at(player_global_position)
-	velocity += transform.x * SPEED * delta
-	
+	if can_move:
+		velocity += transform.x * SPEED * delta
+	else:
+		velocity = Vector2(0,0)
+		
 	move_and_slide()
 
 func _on_detection_area_body_entered(body: Node2D) -> void:
@@ -31,6 +35,9 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	hp -= 1
+	var original_color =  get_modulate()
 	set_modulate("red")
+	await get_tree().create_timer(0.2).timeout
+	set_modulate(original_color)
 	if hp <= 0:
 		queue_free()

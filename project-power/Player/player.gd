@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -400.0
 
 
 func _physics_process(delta: float) -> void:
+		
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var horizontal_movemoent := Input.get_axis("left", "right")
 	var vertical_movement := Input.get_axis("up","down")
@@ -19,9 +20,18 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("right_click"):
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
+		$Right_Glove_Position/RightGlove/Area2D.set_collision_layer(2)
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
-	
-	if Input.is_action_just_pressed("left_click"):
-		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
+		#needs to be changed if time allows
+		await get_tree().create_timer($Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation_length - 0.2).timeout
+		$Right_Glove_Position/RightGlove/Area2D.set_collision_layer(0)
 		
+	if Input.is_action_just_pressed("left_click"):
+		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
+		$Left_Glove_Position/LeftGlove/Area2D.set_collision_layer(2)
+		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
+		#needs to be changed if time allows
+		await get_tree().create_timer($Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation_length - 0.2).timeout
+		$Left_Glove_Position/LeftGlove/Area2D.set_collision_layer(0)
+	
 	move_and_slide()
