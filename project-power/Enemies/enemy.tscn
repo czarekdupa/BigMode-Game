@@ -23,7 +23,6 @@ script = ExtResource("1_ul33b")
 texture = ExtResource("2_epwwa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource("RectangleShape2D_gjogx")
 
 [node name="Detection Area" type="Area2D" parent="."]
