@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=6 format=3 uid="uid://deapctpalo6mk"]
+=======
+[gd_scene load_steps=6 format=3 uid="uid://c5aw481euvm70"]
+>>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://Enemies/fire_boss.gd" id="1_kudw4"]
 [ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_udbo5"]
@@ -15,6 +19,10 @@ radius = 1142.09
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_kudw4")
+<<<<<<< Updated upstream
+=======
+hp = null
+>>>>>>> Stashed changes
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.647059, 0.137255, 0.0980392, 1)
