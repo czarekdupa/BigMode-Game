@@ -18,4 +18,13 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2(0,0)
 	
+	look_at(get_global_mouse_position())
+	
+	if Input.is_action_just_pressed("right_click"):
+		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
+		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
+	
+	if Input.is_action_just_pressed("left_click"):
+		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
+		
 	move_and_slide()
