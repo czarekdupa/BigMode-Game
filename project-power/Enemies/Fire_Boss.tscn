@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://deapctpalo6mk"]
+
+[ext_resource type="Script" path="res://Enemies/fire_boss.gd" id="1_kudw4"]
+[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_udbo5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7dnu"]
+radius = 127.566
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fm7hr"]
+radius = 1142.09
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5b5ly"]
+
+[node name="FireBoss" type="CharacterBody2D"]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_kudw4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.647059, 0.137255, 0.0980392, 1)
+rotation = 3.14159
+scale = Vector2(2, 2)
+texture = ExtResource("2_udbo5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a7dnu")
+
+[node name="detection_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_fm7hr")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_5b5ly")
+
+[connection signal="area_entered" from="detection_area" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="detection_area" to="." method="_on_detection_area_area_exited"]
