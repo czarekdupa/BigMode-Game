@@ -14,7 +14,11 @@ func _physics_process(delta: float) -> void:
 	if can_move:
 		move_to_player()
 	else:
+<<<<<<< Updated upstream
 		velocity = Vector2(0,0)
+=======
+		velocity = (0,0)
+>>>>>>> Stashed changes
 	
 	move_and_slide()
 
