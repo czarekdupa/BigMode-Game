@@ -64,7 +64,7 @@ position = Vector2(81, 135)
 rotation = -0.523599
 scale = Vector2(0.845, 0.845)
 
-[node name="RightGlove" type="Sprite2D" parent="Right_Glove_Position"]
+[node name="RightGlove" type="Sprite2D" parent="Right_Glove_Position" groups=["glove"]]
 script = ExtResource("3_2k27e")
 
 [node name="Sprite2D" type="Sprite2D" parent="Right_Glove_Position/RightGlove"]
@@ -87,7 +87,7 @@ position = Vector2(80, -135)
 rotation = 0.523599
 scale = Vector2(0.845, 0.845)
 
-[node name="LeftGlove" type="Sprite2D" parent="Left_Glove_Position"]
+[node name="LeftGlove" type="Sprite2D" parent="Left_Glove_Position" groups=["glove"]]
 script = ExtResource("3_2k27e")
 
 [node name="Sprite2D" type="Sprite2D" parent="Left_Glove_Position/LeftGlove"]
