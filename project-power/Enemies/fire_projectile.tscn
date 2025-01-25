@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=4 format=3 uid="uid://bsov77ujlgvix"]
+=======
+[gd_scene load_steps=4 format=3 uid="uid://dmhlm3nwm6xt"]
+>>>>>>> Stashed changes
 
 [sub_resource type="Gradient" id="Gradient_4ibg4"]
 colors = PackedColorArray(1, 1, 0.243137, 1, 0.713726, 0, 0, 1)
