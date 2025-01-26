@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 400.0
 const JUMP_VELOCITY = -400.0
 
+var hp = 10
 var knockback_power = 1000
 var damage = 1
 var right_power = 0
@@ -101,3 +102,13 @@ func reset_right_power_with_buffor():
 func reset_left_power_with_buffor():
 	await get_tree().create_timer(power_buffor_time).timeout
 	left_power = 0
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	hp -= 1
+	print(hp)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	hp -= 1
+	print(hp)

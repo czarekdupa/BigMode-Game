@@ -45,11 +45,13 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	is_knocking = true
 	if area.is_in_group("r_glove"):
 		velocity = (global_position - player_global_position).normalized() * area.get_parent().get_parent().knockback_power * area.get_parent().get_parent().right_power
+		take_damage(area.get_parent().get_parent().damage * area.get_parent().get_parent().right_power)
 	elif area.is_in_group("l_glove"):
 		velocity = (global_position - player_global_position).normalized() * area.get_parent().get_parent().knockback_power * area.get_parent().get_parent().left_power
+		take_damage(area.get_parent().get_parent().damage * area.get_parent().get_parent().left_power)
 	_knockback_Cooldown(knockback_cooldown)
 	
-	hp -= 1
+	
 	set_modulate("red")
 	await get_tree().create_timer(0.2).timeout
 	if hp <= 0:
@@ -60,3 +62,6 @@ func _knockback_Cooldown(time: float):
 	await get_tree().create_timer(time).timeout
 	is_knocking = false;
 	velocity = Vector2(0,0)
+
+func take_damage(amount: int):
+	hp -= amount
