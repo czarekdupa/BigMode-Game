@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_7w5u7"]
 [ext_resource type="PackedScene" uid="uid://t4hws5kroee5" path="res://Enemies/enemy.tscn" id="3_ig1au"]
-[ext_resource type="PackedScene" uid="uid://b7jovc0fgr5ph" path="res://Enemies/fire_boss.tscn" id="3_w432f"]
+[ext_resource type="PackedScene" uid="uid://b7jovc0fgr5ph" path="res://Enemies/Fire_Boss.tscn" id="3_w432f"]
 
 [node name="CzarekTestLevel" type="Node2D"]
 
@@ -17,3 +17,38 @@ position = Vector2(219, 101)
 
 [node name="Fire_Boss" parent="." instance=ExtResource("3_w432f")]
 position = Vector2(1122, 199)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_ig1au")]
+modulate = Color(1, 1, 1, 1)
+light_mask = 1
+position = Vector2(438, 202)
+
+[node name="Enemy3" parent="." instance=ExtResource("3_ig1au")]
+modulate = Color(1, 1, 1, 1)
+light_mask = 1
+position = Vector2(657, 303)
+
+[node name="Enemy4" parent="." instance=ExtResource("3_ig1au")]
+modulate = Color(1, 1, 1, 1)
+light_mask = 1
+position = Vector2(876, 404)
+
+[node name="Enemy5" parent="." instance=ExtResource("3_ig1au")]
+modulate = Color(1, 1, 1, 1)
+light_mask = 1
+position = Vector2(1095, 505)
+
+[node name="Enemy6" parent="." instance=ExtResource("3_ig1au")]
+modulate = Color(1, 1, 1, 1)
+light_mask = 1
+position = Vector2(1314, 606)
+
+[node name="Enemy7" parent="." instance=ExtResource("3_ig1au")]
+modulate = Color(1, 1, 1, 1)
+light_mask = 1
+position = Vector2(1533, 707)
+
+[node name="Enemy8" parent="." instance=ExtResource("3_ig1au")]
+modulate = Color(1, 1, 1, 1)
+light_mask = 1
+position = Vector2(1752, 808)

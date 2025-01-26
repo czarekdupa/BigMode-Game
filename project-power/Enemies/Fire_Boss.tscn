@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemies/fire_boss.gd" id="1_6kar8"]
 [ext_resource type="PackedScene" uid="uid://bciusmv38b438" path="res://Enemies/fire_projectile.tscn" id="2_cvyfi"]
-[ext_resource type="Script" path="res://Enemies/projectile_spawner.gd" id="3_r5qwx"]
+[ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_sy0kh"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p46e4"]
 load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
@@ -50,8 +50,7 @@ shape = SubResource("RectangleShape2D_ke1xy")
 [node name="ProjectileTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Projectile_Spawner" type="Node2D" parent="."]
-script = ExtResource("3_r5qwx")
+[node name="Projectile_Spawner" parent="." instance=ExtResource("3_sy0kh")]
 
 [connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection Area" to="." method="_on_detection_area_body_exited"]

@@ -1,7 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=16 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
-[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_qu2qp"]
+[ext_resource type="Texture2D" uid="uid://k3sps8ntwd8b" path="res://Player/Player_Sprite.png" id="2_s3k6a"]
+[ext_resource type="PackedScene" uid="uid://cydjhi0cnkrs0" path="res://Enemies/player_fire_projectile.tscn" id="2_sc4jp"]
+[ext_resource type="Texture2D" uid="uid://bog1gsa4u6s3e" path="res://Player/Gloves/Glove_Sprite.png" id="3_nnfv2"]
+[ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="4_rfn2t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6yi2"]
 radius = 63.6396
@@ -85,13 +88,22 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_pgy3h"]
 radius = 57.0789
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iytym"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnb1h"]
+bg_color = Color(1, 1, 0, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 12
 motion_mode = 1
 script = ExtResource("1_6vd06")
+projectile_scene = ExtResource("2_sc4jp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_qu2qp")
+rotation = 1.5708
+scale = Vector2(2, 2)
+texture = ExtResource("2_s3k6a")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 12
@@ -105,12 +117,15 @@ rotation = -0.523599
 scale = Vector2(0.845, 0.845)
 
 [node name="RightGlove" type="Area2D" parent="Right_Glove_Position" groups=["glove", "r_glove"]]
+scale = Vector2(-1, 1)
 collision_layer = 0
 collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Right_Glove_Position/RightGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
-texture = ExtResource("2_qu2qp")
+rotation = 1.5708
+scale = Vector2(-3, -3)
+texture = ExtResource("3_nnfv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Glove_Position/RightGlove"]
 shape = SubResource("CapsuleShape2D_wxdx5")
@@ -131,7 +146,9 @@ collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Left_Glove_Position/LeftGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
-texture = ExtResource("2_qu2qp")
+rotation = 1.5708
+scale = Vector2(3, 3)
+texture = ExtResource("3_nnfv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Glove_Position/LeftGlove"]
 shape = SubResource("CapsuleShape2D_wxdx5")
@@ -146,6 +163,25 @@ zoom = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_pgy3h")
+
+[node name="Projectile_Spawner" parent="." instance=ExtResource("4_rfn2t")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="l_progressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 21.0
+offset_top = 574.0
+offset_right = 430.0
+offset_bottom = 601.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_iytym")
+value = 50.0
+
+[node name="r_progressBar2" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 724.0
+offset_top = 569.0
+offset_right = 1133.0
+offset_bottom = 596.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_lnb1h")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

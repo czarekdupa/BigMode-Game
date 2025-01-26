@@ -14,6 +14,15 @@ var power_gain_speed = 0.2
 var power_gain_amount = 0.5
 var is_charging = false
 var power_buffor_time = 0.2
+var special_ability_power_threshold = 3
+
+var fire_glove = false
+
+@export var projectile_scene = PackedScene
+
+func _ready() -> void:
+	$CanvasLayer/l_progressBar.max_value = max_power
+	$CanvasLayer/r_progressBar2.max_value = max_power
 
 func _physics_process(delta: float) -> void:
 	
@@ -27,23 +36,8 @@ func _physics_process(delta: float) -> void:
 	
 	look_at(get_global_mouse_position())
 	
-	#if Input.is_action_just_pressed("right_click"):
-		#$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
-		#$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
-		#collisionHandler(1)
-		##needs to be changed if time allows
-		##await get_tree().create_timer($Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation_length - 0.2).timeout
-		##$Right_Glove_Position/RightGlove/Area2D.set_collision_layer(0)
-		
-	
-	
-	#if Input.is_action_just_pressed("left_click"):
-		#$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
-		#$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
-		#collisionHandler(2)
-		##needs to be changed if time allows
-		##await get_tree().create_timer($Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation_length - 0.2).timeout
-		##$Left_Glove_Position/LeftGlove/Area2D.set_collision_layer(0)
+	$CanvasLayer/r_progressBar2.value = right_power
+	$CanvasLayer/l_progressBar.value = left_power
 	
 	if Input.is_action_just_pressed("right_click"):
 		is_charging = true
@@ -56,6 +50,8 @@ func _physics_process(delta: float) -> void:
 		reset_right_power_with_buffor()
 		#$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
+		if fire_glove == true && right_power >= special_ability_power_threshold:
+			$Projectile_Spawner.spawn_projectile(get_global_mouse_position(), 1)
 		collisionHandler(1)
 		
 	if Input.is_action_just_pressed("left_click"):

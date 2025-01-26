@@ -75,6 +75,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	$Sprite2D.set_modulate("red")
 	await get_tree().create_timer(0.2).timeout
 	if hp <= 0:
+		player.fire_glove = true
 		queue_free()
 	$Sprite2D.set_modulate(ORIGINAL_COLOR)
 

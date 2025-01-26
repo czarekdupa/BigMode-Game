@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bciusmv38b438"]
+[gd_scene load_steps=5 format=3 uid="uid://cydjhi0cnkrs0"]
 
-[ext_resource type="Script" path="res://Enemies/fire_projectile.gd" id="1_5hwx2"]
+[ext_resource type="Script" path="res://Enemies/fire_projectile.gd" id="1_jcasx"]
 
 [sub_resource type="Gradient" id="Gradient_4ibg4"]
 colors = PackedColorArray(1, 1, 0.243137, 1, 0.713726, 0, 0, 1)
@@ -18,9 +18,11 @@ repeat = 2
 radius = 8.00001
 height = 74.0
 
-[node name="Fire_Projectile" type="Area2D"]
-collision_layer = 8
-script = ExtResource("1_5hwx2")
+[node name="Player_fire_Projectile" type="Area2D"]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_jcasx")
+speed = 5000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_1r5b7")
