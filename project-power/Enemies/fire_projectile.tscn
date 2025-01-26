@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bciusmv38b438"]
+[gd_scene load_steps=5 format=3 uid="uid://bciusmv38b438"]
+
+[ext_resource type="Script" path="res://Enemies/fire_projectile.gd" id="1_5hwx2"]
 
 [sub_resource type="Gradient" id="Gradient_4ibg4"]
 colors = PackedColorArray(1, 1, 0.243137, 1, 0.713726, 0, 0, 1)
@@ -13,11 +15,12 @@ fill_to = Vector2(0.123853, 0.623853)
 repeat = 2
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jq80l"]
-radius = 32.0
-height = 84.0
+radius = 8.00001
+height = 74.0
 
 [node name="Fire_Projectile" type="Area2D"]
 collision_layer = 8
+script = ExtResource("1_5hwx2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_1r5b7")

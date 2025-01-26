@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=8 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
 [ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_qu2qp"]
-[ext_resource type="Script" path="res://Player/Gloves/right_glove.gd" id="3_2k27e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n1vpl"]
 size = Vector2(120, 120)
@@ -49,7 +48,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_mask = 4
+collision_mask = 12
 motion_mode = 1
 script = ExtResource("1_6vd06")
 
@@ -64,17 +63,17 @@ position = Vector2(81, 135)
 rotation = -0.523599
 scale = Vector2(0.845, 0.845)
 
-[node name="RightGlove" type="Sprite2D" parent="Right_Glove_Position" groups=["glove"]]
-script = ExtResource("3_2k27e")
+[node name="RightGlove" type="Area2D" parent="Right_Glove_Position" groups=["glove"]]
+scale = Vector2(1, 1)
+collision_layer = 2
+collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Right_Glove_Position/RightGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
+scale = Vector2(1, 1)
 texture = ExtResource("2_qu2qp")
 
-[node name="Area2D" type="Area2D" parent="Right_Glove_Position/RightGlove"]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Glove_Position/RightGlove/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Glove_Position/RightGlove"]
 shape = SubResource("CapsuleShape2D_wxdx5")
 
 [node name="RG_AnimationPlayer" type="AnimationPlayer" parent="Right_Glove_Position/RightGlove"]
@@ -87,20 +86,23 @@ position = Vector2(80, -135)
 rotation = 0.523599
 scale = Vector2(0.845, 0.845)
 
-[node name="LeftGlove" type="Sprite2D" parent="Left_Glove_Position" groups=["glove"]]
-script = ExtResource("3_2k27e")
+[node name="LeftGlove" type="Area2D" parent="Left_Glove_Position" groups=["glove"]]
+scale = Vector2(1, 1)
+collision_layer = 2
+collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Left_Glove_Position/LeftGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
+scale = Vector2(1, 1)
 texture = ExtResource("2_qu2qp")
 
-[node name="Area2D" type="Area2D" parent="Left_Glove_Position/LeftGlove"]
-collision_layer = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Glove_Position/LeftGlove/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Glove_Position/LeftGlove"]
 shape = SubResource("CapsuleShape2D_wxdx5")
 
 [node name="LG_AnimationPlayer" type="AnimationPlayer" parent="Left_Glove_Position/LeftGlove"]
 libraries = {
 "": SubResource("AnimationLibrary_ipwn1")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)

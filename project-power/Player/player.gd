@@ -5,10 +5,10 @@ const SPEED = 400.0
 const JUMP_VELOCITY = -400.0
 
 var knockback_power = 1000
+var damage = 1
 
 func _physics_process(delta: float) -> void:
-		
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	
 	var horizontal_movemoent := Input.get_axis("left", "right")
 	var vertical_movement := Input.get_axis("up","down")
 	
@@ -40,11 +40,11 @@ func _physics_process(delta: float) -> void:
 func collisionHandler(glove: int):
 	if glove == 1:
 		await get_tree().create_timer(0.233).timeout
-		$Right_Glove_Position/RightGlove/Area2D.set_collision_layer(2)
+		$Right_Glove_Position/RightGlove.set_collision_layer(2)
 		await get_tree().create_timer(0.05).timeout
-		$Right_Glove_Position/RightGlove/Area2D.set_collision_layer(0)
+		$Right_Glove_Position/RightGlove.set_collision_layer(0)
 	else:
 		await get_tree().create_timer(0.233).timeout
-		$Left_Glove_Position/LeftGlove/Area2D.set_collision_layer(2)
+		$Left_Glove_Position/LeftGlove.set_collision_layer(2)
 		await get_tree().create_timer(0.05).timeout
-		$Left_Glove_Position/LeftGlove/Area2D.set_collision_layer(0)
+		$Left_Glove_Position/LeftGlove.set_collision_layer(0)
