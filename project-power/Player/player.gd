@@ -6,6 +6,13 @@ const JUMP_VELOCITY = -400.0
 
 var knockback_power = 1000
 var damage = 1
+var right_power = 0
+var left_power = 0
+var max_power = 100
+var power_gain_speed = 0.2
+var power_gain_amount = 0.5
+var is_charging = false
+var power_buffor_time = 0.2
 
 func _physics_process(delta: float) -> void:
 	
@@ -19,32 +26,78 @@ func _physics_process(delta: float) -> void:
 	
 	look_at(get_global_mouse_position())
 	
+	#if Input.is_action_just_pressed("right_click"):
+		#$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
+		#$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
+		#collisionHandler(1)
+		##needs to be changed if time allows
+		##await get_tree().create_timer($Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation_length - 0.2).timeout
+		##$Right_Glove_Position/RightGlove/Area2D.set_collision_layer(0)
+		
+	
+	
+	#if Input.is_action_just_pressed("left_click"):
+		#$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
+		#$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
+		#collisionHandler(2)
+		##needs to be changed if time allows
+		##await get_tree().create_timer($Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation_length - 0.2).timeout
+		##$Left_Glove_Position/LeftGlove/Area2D.set_collision_layer(0)
+	
 	if Input.is_action_just_pressed("right_click"):
-		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
+		is_charging = true
+		start_right_power_gain()
+		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_windup_anim")
+		await get_tree().create_timer($Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation_length).timeout
+		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_loop_anim")
+	if Input.is_action_just_released("right_click"):
+		is_charging = false
+		reset_right_power_with_buffor()
+		#$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
 		collisionHandler(1)
-		#needs to be changed if time allows
-		#await get_tree().create_timer($Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation_length - 0.2).timeout
-		#$Right_Glove_Position/RightGlove/Area2D.set_collision_layer(0)
 		
 	if Input.is_action_just_pressed("left_click"):
-		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
+		is_charging = true
+		start_left_power_gain()
+		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_windup_anim")
+		await get_tree().create_timer($Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation_length).timeout
+		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_loop_anim")
+	if Input.is_action_just_released("left_click"):
+		is_charging = false
+		reset_left_power_with_buffor()
+		#$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
 		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
 		collisionHandler(2)
-		#needs to be changed if time allows
-		#await get_tree().create_timer($Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation_length - 0.2).timeout
-		#$Left_Glove_Position/LeftGlove/Area2D.set_collision_layer(0)
-	
+		
 	move_and_slide()
 
 func collisionHandler(glove: int):
 	if glove == 1:
-		await get_tree().create_timer(0.233).timeout
+		await get_tree().create_timer(0.0333).timeout
 		$Right_Glove_Position/RightGlove.set_collision_layer(2)
 		await get_tree().create_timer(0.05).timeout
 		$Right_Glove_Position/RightGlove.set_collision_layer(0)
 	else:
-		await get_tree().create_timer(0.233).timeout
+		await get_tree().create_timer(0.0333).timeout
 		$Left_Glove_Position/LeftGlove.set_collision_layer(2)
 		await get_tree().create_timer(0.05).timeout
 		$Left_Glove_Position/LeftGlove.set_collision_layer(0)
+		
+func start_right_power_gain():
+	while is_charging:
+		right_power += power_gain_amount
+		await get_tree().create_timer(power_gain_speed).timeout
+		
+func start_left_power_gain():
+	while is_charging:
+		left_power += power_gain_amount
+		await get_tree().create_timer(power_gain_speed).timeout
+		
+func reset_right_power_with_buffor():
+	await get_tree().create_timer(power_buffor_time).timeout
+	right_power = 0
+	
+func reset_left_power_with_buffor():
+	await get_tree().create_timer(power_buffor_time).timeout
+	left_power = 0

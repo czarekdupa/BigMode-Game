@@ -16,6 +16,7 @@ func _physics_process(delta: float) -> void:
 	if player:
 		player_global_position = player.global_position
 		look_at(player_global_position)
+		
 	
 	if is_knocking == false:
 		if can_move:
@@ -29,7 +30,6 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		movement_direction = (body.global_position - global_position).normalized()
 		player = body
-		knockback_power = player.knockback_power
 		can_move = true
 	else:
 		pass
@@ -43,7 +43,10 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	is_knocking = true
-	velocity = (global_position - player_global_position).normalized() * knockback_power
+	if area.is_in_group("r_glove"):
+		velocity = (global_position - player_global_position).normalized() * area.get_parent().get_parent().knockback_power * area.get_parent().get_parent().right_power
+	elif area.is_in_group("l_glove"):
+		velocity = (global_position - player_global_position).normalized() * area.get_parent().get_parent().knockback_power * area.get_parent().get_parent().left_power
 	_knockback_Cooldown(knockback_cooldown)
 	
 	hp -= 1

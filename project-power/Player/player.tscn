@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=10 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
 [ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_qu2qp"]
@@ -35,15 +35,50 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.233333, 0.266667, 0.5),
-"transitions": PackedFloat32Array(1, 3.24901, 3.03143, 0.217637, 1),
+"times": PackedFloat32Array(0, 0.133333, 0.5),
+"transitions": PackedFloat32Array(0.1756, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(-50, 0), Vector2(200, 0), Vector2(230, 0), Vector2(0, 0)]
+"values": [Vector2(-50, 0), Vector2(200, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_a3wxb"]
+resource_name = "charge_up_windup_anim"
+length = 0.075
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667),
+"transitions": PackedFloat32Array(1, 7.46426),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-50, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ym4sa"]
+resource_name = "charge_up_loop_anim"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-50, 0), Vector2(-80, 0), Vector2(-50, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ipwn1"]
 _data = {
 "RESET": SubResource("Animation_q15ls"),
+"charge_up_loop_anim": SubResource("Animation_ym4sa"),
+"charge_up_windup_anim": SubResource("Animation_a3wxb"),
 "right_glove_anim": SubResource("Animation_2n806")
 }
 
@@ -63,14 +98,12 @@ position = Vector2(81, 135)
 rotation = -0.523599
 scale = Vector2(0.845, 0.845)
 
-[node name="RightGlove" type="Area2D" parent="Right_Glove_Position" groups=["glove"]]
-scale = Vector2(1, 1)
+[node name="RightGlove" type="Area2D" parent="Right_Glove_Position" groups=["glove", "r_glove"]]
 collision_layer = 0
 collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Right_Glove_Position/RightGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
-scale = Vector2(1, 1)
 texture = ExtResource("2_qu2qp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Glove_Position/RightGlove"]
@@ -86,14 +119,12 @@ position = Vector2(80, -135)
 rotation = 0.523599
 scale = Vector2(0.845, 0.845)
 
-[node name="LeftGlove" type="Area2D" parent="Left_Glove_Position" groups=["glove"]]
-scale = Vector2(1, 1)
+[node name="LeftGlove" type="Area2D" parent="Left_Glove_Position" groups=["glove", "l_glove"]]
 collision_layer = 0
 collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Left_Glove_Position/LeftGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
-scale = Vector2(1, 1)
 texture = ExtResource("2_qu2qp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Glove_Position/LeftGlove"]
