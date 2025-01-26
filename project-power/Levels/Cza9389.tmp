@@ -17,6 +17,3 @@ position = Vector2(219, 101)
 
 [node name="Fire_Boss" parent="." instance=ExtResource("3_w432f")]
 position = Vector2(1122, 199)
-speed = 100
-keep_distance = 600
-fireball_timer_time = 3
