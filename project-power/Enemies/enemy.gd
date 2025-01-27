@@ -50,14 +50,9 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("l_glove"):
 		velocity = (global_position - player_global_position).normalized() * area.owner.knockback_power * area.get_parent().get_parent().left_power
 		take_damage(area.owner.damage * area.owner.left_power)
+	elif area.is_in_group("glove"):
+		take_damage(area.damage)
 	_knockback_Cooldown(knockback_cooldown)
-	
-	
-	set_modulate("red")
-	await get_tree().create_timer(0.2).timeout
-	if hp <= 0:
-		queue_free()
-	set_modulate(original_color)
 	
 func _knockback_Cooldown(time: float):
 	await get_tree().create_timer(time).timeout
@@ -66,9 +61,12 @@ func _knockback_Cooldown(time: float):
 
 func take_damage(amount: int):
 	hp -= amount
-
-
+		#changes color
+	set_modulate("red")
+	await get_tree().create_timer(0.2).timeout
+	if hp <= 0:
+		queue_free()
+	set_modulate(original_color)
+	
 func _on_attack_box_area_entered(area: Area2D) -> void:
-	if area.owner.is_in_group("player"):
-		area.owner.take_damage(damage)
-		print("took " + str(damage) + " damage from" + $".".name)
+	pass

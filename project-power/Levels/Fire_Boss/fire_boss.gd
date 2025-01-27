@@ -61,6 +61,7 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 		player = body
 		can_move = true
 		can_shoot = true
+		
 func _on_detection_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		can_move = false
@@ -71,14 +72,20 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 #DETECTS IF HIT BY PLAYER
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("glove"):
-		hp -= 1
+		if area.owner:
+			take_damage(area.owner.damage)
+		else:
+			take_damage(area.damage)
+
+func take_damage(damage):
+	hp-= damage
 	$Sprite2D.set_modulate("red")
 	await get_tree().create_timer(0.2).timeout
 	if hp <= 0:
 		player.fire_glove = true
 		queue_free()
 	$Sprite2D.set_modulate(ORIGINAL_COLOR)
-
+	
 #physical timers-----------------------------------------------------------------------------------
 func _on_projectile_timer_timeout() -> void:
 	can_shoot = true

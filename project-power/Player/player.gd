@@ -16,7 +16,7 @@ extends CharacterBody2D
 @export var power_buffor_time = 0.2
 @export var special_ability_power_threshold = 3
 var is_charging = false
-var fire_glove = false
+var fire_glove = true
 @export_group("Projectiles")
 @export var projectile_scene = PackedScene
 
@@ -99,12 +99,20 @@ func reset_left_power_with_buffor():
 	await get_tree().create_timer(power_buffor_time).timeout
 	left_power = 0
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	pass
-	
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
+func _on_hitbox_body_entered(body: Node2D) -> void:
 	pass
+
+
+func _on_hitbox_area_entered(area: Area2D) -> void:
+	if area.owner:
+		if area.owner.damage:
+			take_damage(area.owner.damage)
+	elif area.damage:
+		take_damage(area.damage)
+	else:
+		print("passed " , str(area))
 
 func take_damage(amount):
 	hp -= amount
+	print("current hp " + str(hp))
