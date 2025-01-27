@@ -116,3 +116,12 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func take_damage(amount):
 	hp -= amount
 	print("current hp " + str(hp))
+	
+#shitty camera shake below
+	var camera_shake = amount *  100
+	for i in 3:
+		var random_offset = Vector2(randi_range(-camera_shake,camera_shake),randi_range(-camera_shake,camera_shake))
+		print(random_offset)
+		$Camera2D.offset = random_offset
+		await get_tree().create_timer(0.05).timeout
+	$Camera2D.offset = Vector2(0,0)
