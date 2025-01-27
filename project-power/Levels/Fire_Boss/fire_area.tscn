@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://curj7ix5ye7iv"]
+
+[ext_resource type="Texture2D" uid="uid://c80iudm26hwb2" path="res://Levels/Fire_Boss/animated fire-Sheet.png" id="1_r052c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mvk1x"]
+size = Vector2(32, 32)
+
+[node name="Fire_Area" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_r052c")
+region_enabled = true
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mvk1x")

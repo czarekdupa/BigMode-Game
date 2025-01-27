@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ylguwbx0pm0t"]
+
+[ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_2m5fo"]
+[ext_resource type="PackedScene" uid="uid://curj7ix5ye7iv" path="res://Levels/Fire_Boss/fire_area.tscn" id="2_ty128"]
+
+[node name="Fire_Boss_Level" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_2m5fo")]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Fire_Area" parent="Node2D" instance=ExtResource("2_ty128")]
+position = Vector2(-816, 256)

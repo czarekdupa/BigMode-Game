@@ -167,6 +167,7 @@ shape = SubResource("CircleShape2D_pgy3h")
 [node name="Projectile_Spawner" parent="." instance=ExtResource("4_rfn2t")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="l_progressBar" type="ProgressBar" parent="CanvasLayer"]
 offset_left = 21.0

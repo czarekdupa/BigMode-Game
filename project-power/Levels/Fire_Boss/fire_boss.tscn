@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b7jovc0fgr5ph"]
 
-[ext_resource type="Script" path="res://Enemies/fire_boss.gd" id="1_6kar8"]
+[ext_resource type="Script" path="res://Levels/Fire_Boss/fire_boss.gd" id="1_6kar8"]
 [ext_resource type="PackedScene" uid="uid://bciusmv38b438" path="res://Enemies/fire_projectile.tscn" id="2_cvyfi"]
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_sy0kh"]
 
