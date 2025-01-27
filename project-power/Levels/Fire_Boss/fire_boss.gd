@@ -32,7 +32,7 @@ func _physics_process(delta: float) -> void:
 				move_away_from_player()
 				circle_direction = -PI/2
 			else:
-				rotate_around_player(distance_to_player, circle_direction)
+				rotate_around_player(circle_direction)
 			
 		if can_shoot:
 			var bullets = randi_range(1,3)
@@ -49,7 +49,7 @@ func move_to_player():
 func move_away_from_player():
 	velocity = -movement_direction * speed * 0.5
 	move_and_slide()
-func rotate_around_player(distance_to_player,direction = PI/2):
+func rotate_around_player(direction = PI/2):
 	velocity = movement_direction.rotated(direction) * speed * 1.5
 	
 	move_and_slide()

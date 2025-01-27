@@ -5,9 +5,9 @@
 
 [node name="Fire_Boss_Level" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_2m5fo")]
-
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="Fire_Area" parent="Node2D" instance=ExtResource("2_ty128")]
 position = Vector2(-816, 256)
+
+[node name="Player" parent="." instance=ExtResource("1_2m5fo")]

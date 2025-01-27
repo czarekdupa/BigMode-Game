@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @export var hp : = 10
+@export var damage := 1
 @export var knockback_cooldown: = 0.2
 const SPEED = 300
 const JUMP_VELOCITY = -400.0
@@ -44,11 +45,11 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	is_knocking = true
 	if area.is_in_group("r_glove"):
-		velocity = (global_position - player_global_position).normalized() * area.get_parent().get_parent().knockback_power * area.get_parent().get_parent().right_power
-		take_damage(area.get_parent().get_parent().damage * area.get_parent().get_parent().right_power)
+		velocity = (global_position - player_global_position).normalized() * area.owner.knockback_power * area.get_parent().get_parent().right_power
+		take_damage(area.get_parent().get_parent().damage * area.owner.right_power)
 	elif area.is_in_group("l_glove"):
-		velocity = (global_position - player_global_position).normalized() * area.get_parent().get_parent().knockback_power * area.get_parent().get_parent().left_power
-		take_damage(area.get_parent().get_parent().damage * area.get_parent().get_parent().left_power)
+		velocity = (global_position - player_global_position).normalized() * area.owner.knockback_power * area.get_parent().get_parent().left_power
+		take_damage(area.owner.damage * area.owner.left_power)
 	_knockback_Cooldown(knockback_cooldown)
 	
 	
@@ -65,3 +66,9 @@ func _knockback_Cooldown(time: float):
 
 func take_damage(amount: int):
 	hp -= amount
+
+
+func _on_attack_box_area_entered(area: Area2D) -> void:
+	if area.owner.is_in_group("player"):
+		area.owner.take_damage(damage)
+		print("took " + str(damage) + " damage from" + $".".name)

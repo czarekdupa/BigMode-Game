@@ -1,23 +1,23 @@
 extends CharacterBody2D
 
 
-const SPEED = 400.0
-const JUMP_VELOCITY = -400.0
 
-var hp = 10
-var knockback_power = 1000
-var damage = 1
-var right_power = 0
-var left_power = 0
-var max_power = 100
-var power_gain_speed = 0.2
-var power_gain_amount = 0.5
+
+@export_group("Player Stats") 
+@export var speed := 400.0
+@export var hp := 10
+@export var damage := 1
+@export var knockback_power = 1000
+@export var right_power = 0
+@export var left_power = 0
+@export var max_power = 100
+@export var power_gain_speed = 0.2
+@export var power_gain_amount = 0.5
+@export var power_buffor_time = 0.2
+@export var special_ability_power_threshold = 3
 var is_charging = false
-var power_buffor_time = 0.2
-var special_ability_power_threshold = 3
-
 var fire_glove = false
-
+@export_group("Projectiles")
 @export var projectile_scene = PackedScene
 
 func _ready() -> void:
@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	var vertical_movement := Input.get_axis("up","down")
 	
 	if horizontal_movemoent or vertical_movement:
-		velocity = Vector2(horizontal_movemoent, vertical_movement).normalized() * SPEED
+		velocity = Vector2(horizontal_movemoent, vertical_movement).normalized() * speed
 	else:
 		velocity = Vector2(0,0)
 	
@@ -99,12 +99,12 @@ func reset_left_power_with_buffor():
 	await get_tree().create_timer(power_buffor_time).timeout
 	left_power = 0
 
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	hp -= 1
-	print(hp)
-
+	pass
+	
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	hp -= 1
-	print(hp)
+	pass
+
+func take_damage(amount):
+	hp -= amount
