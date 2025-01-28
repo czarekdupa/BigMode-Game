@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="4_rfn2t"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6yi2"]
-radius = 57.4282
+radius = 23.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wxdx5"]
-radius = 63.0
-height = 128.0
+radius = 13.8923
+height = 32.2487
 
 [sub_resource type="Animation" id="Animation_q15ls"]
 length = 0.001
@@ -99,7 +99,6 @@ projectile_scene = ExtResource("2_sc4jp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(2, 2)
 texture = ExtResource("2_s3k6a")
 
 [node name="hitbox" type="Area2D" parent="."]
@@ -109,9 +108,8 @@ collision_mask = 12
 shape = SubResource("CircleShape2D_d6yi2")
 
 [node name="Right_Glove_Position" type="Node2D" parent="."]
-position = Vector2(81, 135)
+position = Vector2(20, 45)
 rotation = -0.523599
-scale = Vector2(0.845, 0.845)
 
 [node name="RightGlove" type="Area2D" parent="Right_Glove_Position" groups=["glove", "r_glove"]]
 scale = Vector2(-1, 1)
@@ -121,7 +119,7 @@ collision_mask = 4
 [node name="Sprite2D" type="Sprite2D" parent="Right_Glove_Position/RightGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
 rotation = 1.5708
-scale = Vector2(-3, -3)
+scale = Vector2(-1, -1)
 texture = ExtResource("3_nnfv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right_Glove_Position/RightGlove"]
@@ -133,9 +131,8 @@ libraries = {
 }
 
 [node name="Left_Glove_Position" type="Node2D" parent="."]
-position = Vector2(80, -135)
+position = Vector2(20, -45)
 rotation = 0.523599
-scale = Vector2(0.845, 0.845)
 
 [node name="LeftGlove" type="Area2D" parent="Left_Glove_Position" groups=["glove", "l_glove"]]
 collision_layer = 0
@@ -144,7 +141,6 @@ collision_mask = 4
 [node name="Sprite2D" type="Sprite2D" parent="Left_Glove_Position/LeftGlove"]
 modulate = Color(0.93986, 0, 0.1428, 1)
 rotation = 1.5708
-scale = Vector2(3, 3)
 texture = ExtResource("3_nnfv2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left_Glove_Position/LeftGlove"]
@@ -156,7 +152,6 @@ libraries = {
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_d6yi2")

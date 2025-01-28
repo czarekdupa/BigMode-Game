@@ -20,6 +20,7 @@ var player : CharacterBody2D
 
 func _physics_process(delta: float) -> void:
 	if player:
+		look_at(player.global_position)
 		#get distance sqrt(a^2 + b^2) = c
 		var distance_to_player = sqrt((player.global_position.x - global_position.x)*(player.global_position.x - global_position.x)
 		+(player.global_position.y - global_position.y)*(player.global_position.y - global_position.y))

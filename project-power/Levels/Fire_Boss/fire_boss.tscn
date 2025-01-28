@@ -3,23 +3,19 @@
 [ext_resource type="Script" path="res://Levels/Fire_Boss/fire_boss.gd" id="1_6kar8"]
 [ext_resource type="PackedScene" uid="uid://bciusmv38b438" path="res://Enemies/fire_projectile.tscn" id="2_cvyfi"]
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_sy0kh"]
+[ext_resource type="Texture2D" uid="uid://5b2ndvtcsg4o" path="res://Levels/Fire_Boss/Fire_Boss_Sprite.png" id="3_wc7vr"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p46e4"]
-load_path = "res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmfhk"]
-size = Vector2(120, 120)
+[sub_resource type="CircleShape2D" id="CircleShape2D_w3unp"]
+radius = 52.1967
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l60ct"]
 radius = 445.36
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ke1xy"]
-size = Vector2(122, 122)
+[sub_resource type="CircleShape2D" id="CircleShape2D_feayr"]
+radius = 52.1967
 
 [node name="Fire_Boss" type="CharacterBody2D" groups=["enemy"]]
-modulate = Color(0.148154, 0.846206, 0.343162, 1)
 light_mask = 4
-rotation = 3.14159
 scale = Vector2(2, 2)
 collision_layer = 4
 motion_mode = 1
@@ -28,10 +24,11 @@ hp = 10
 projectile_scene = ExtResource("2_cvyfi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("CompressedTexture2D_p46e4")
+rotation = 1.5708
+texture = ExtResource("3_wc7vr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_pmfhk")
+shape = SubResource("CircleShape2D_w3unp")
 
 [node name="Detection Area" type="Area2D" parent="."]
 collision_layer = 0
@@ -45,7 +42,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_ke1xy")
+shape = SubResource("CircleShape2D_feayr")
 
 [node name="ProjectileTimer" type="Timer" parent="."]
 one_shot = true
