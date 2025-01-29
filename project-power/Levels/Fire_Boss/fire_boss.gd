@@ -49,14 +49,16 @@ func _physics_process(delta: float) -> void:
 	
 
 func move_to_player():
-	velocity = lerp(velocity, movement_direction * speed * 2, 1)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self,"velocity", movement_direction * speed * 2, 1)
 	move_and_slide()
 func move_away_from_player():
-	velocity = -movement_direction * speed * 0.5
+	var tween = get_tree().create_tween()
+	tween.tween_property(self,"velocity", -movement_direction * speed, 1)
 	move_and_slide()
 func rotate_around_player(direction = PI/2):
-	velocity = movement_direction.rotated(direction) * speed 
-	
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "velocity",movement_direction.rotated(direction) * speed, 0.5)
 	move_and_slide()
 
 
