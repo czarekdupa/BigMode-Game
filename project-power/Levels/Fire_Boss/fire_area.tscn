@@ -1,25 +1,56 @@
-[gd_scene load_steps=4 format=3 uid="uid://curj7ix5ye7iv"]
+[gd_scene load_steps=8 format=3 uid="uid://curj7ix5ye7iv"]
 
 [ext_resource type="Script" path="res://Levels/Fire_Boss/fire_area.gd" id="1_24g22"]
 [ext_resource type="Texture2D" uid="uid://c80iudm26hwb2" path="res://Levels/Fire_Boss/animated fire-Sheet.png" id="1_r052c"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mrt1"]
+atlas = ExtResource("1_r052c")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_711uc"]
+atlas = ExtResource("1_r052c")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lvbo"]
+atlas = ExtResource("1_r052c")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0qjtx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mrt1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_711uc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lvbo")
+}],
+"loop": true,
+"name": &"fire",
+"speed": 15.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvk1x"]
 size = Vector2(32, 32)
 
-[node name="Fire_Area" type="Area2D"]
+[node name="Fire_Area" type="Area2D" groups=["fire_area"]]
 scale = Vector2(3, 3)
 collision_layer = 8
 script = ExtResource("1_24g22")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_r052c")
-region_enabled = true
-region_rect = Rect2(0, 0, 32, 32)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0qjtx")
+animation = &"fire"
+autoplay = "fire"
+frame_progress = 0.320083
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_mvk1x")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_area_exited"]

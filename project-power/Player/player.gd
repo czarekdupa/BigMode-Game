@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export_group("Player Stats") 
 @export var speed := 400.0
 @export var hp := 10
+var original_modulate := get_modulate()
 @export var damage := 1
 @export var knockback_power = 1000
 @export var right_power = 0
@@ -43,43 +44,26 @@ func _physics_process(delta: float) -> void:
 		is_charging = true
 		start_right_power_gain()
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_windup_anim")
-		await get_tree().create_timer($Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation_length).timeout
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_loop_anim")
 	if Input.is_action_just_released("right_click"):
 		is_charging = false
 		reset_right_power_with_buffor()
-		#$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
 		if fire_glove == true && right_power >= special_ability_power_threshold:
 			$Projectile_Spawner.spawn_projectile(get_global_mouse_position(), 1)
-		collisionHandler(1)
 		
 	if Input.is_action_just_pressed("left_click"):
 		is_charging = true
 		start_left_power_gain()
 		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_windup_anim")
-		await get_tree().create_timer($Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation_length).timeout
 		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_loop_anim")
 	if Input.is_action_just_released("left_click"):
 		is_charging = false
 		reset_left_power_with_buffor()
-		#$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
 		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
-		collisionHandler(2)
 		
 	move_and_slide()
 
-func collisionHandler(glove: int):
-	if glove == 1:
-		await get_tree().create_timer(0.0333).timeout
-		$Right_Glove_Position/RightGlove.set_collision_layer(2)
-		await get_tree().create_timer(0.05).timeout
-		$Right_Glove_Position/RightGlove.set_collision_layer(0)
-	else:
-		await get_tree().create_timer(0.0333).timeout
-		$Left_Glove_Position/LeftGlove.set_collision_layer(2)
-		await get_tree().create_timer(0.05).timeout
-		$Left_Glove_Position/LeftGlove.set_collision_layer(0)
 		
 func start_right_power_gain():
 	while is_charging:
@@ -105,7 +89,9 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.owner:
+	if area.is_in_group("fire_area"):
+		take_damage(area.damage_per_second)
+	elif area.owner:
 		if area.owner.damage:
 			take_damage(area.owner.damage)
 	elif area.damage:
@@ -116,12 +102,14 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func take_damage(amount):
 	hp -= amount
 	print("current hp " + str(hp))
+	set_modulate("red")
 	
-#shitty camera shake below
+	#camera shake and red color below
 	var camera_shake = amount *  100
+	var tween = get_tree().create_tween()
 	for i in 3:
 		var random_offset = Vector2(randi_range(-camera_shake,camera_shake),randi_range(-camera_shake,camera_shake))
-		print(random_offset)
-		$Camera2D.offset = random_offset
-		await get_tree().create_timer(0.05).timeout
-	$Camera2D.offset = Vector2(0,0)
+		await tween.tween_property($Camera2D,"offset", random_offset, 0.05)
+	tween.tween_property($Camera2D,"offset", Vector2(0,0), 0.05)
+	
+	set_modulate(original_modulate)

@@ -23,7 +23,8 @@ func _physics_process(delta: float) -> void:
 		if can_move:
 			velocity += (player_global_position - global_position).normalized() * SPEED * delta
 		else:
-			velocity = Vector2(0,0)
+			var tween = get_tree().create_tween()
+			tween.tween_property(self,"velocity", Vector2(0,0), 0.5)
 		
 	move_and_slide()
 
@@ -57,7 +58,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func _knockback_Cooldown(time: float):
 	await get_tree().create_timer(time).timeout
 	is_knocking = false;
-	velocity = Vector2(0,0)
+	var tween = get_tree().create_tween()
+	tween.tween_property(self,"velocity", Vector2(0,0), 0.2)
 
 func take_damage(amount: int):
 	hp -= amount

@@ -2,10 +2,10 @@ extends CharacterBody2D
 
 @export_category("Stats")
 @export var hp := 3
+@onready var health_bar = $CanvasLayer/Health_Bar
 @export var speed = 300
 @export var projectile_scene: PackedScene
-@export var keep_distance := 600
-
+@export var keep_distance := 300
 @export_category("Timers")
 @export var fireball_timer_time := 3
 
@@ -17,6 +17,10 @@ var can_move : bool
 var can_shoot : bool
 var player : CharacterBody2D
 	
+
+func _ready():
+	health_bar.max_value = hp
+	health_bar.value = hp
 
 func _physics_process(delta: float) -> void:
 	if player:
@@ -45,13 +49,13 @@ func _physics_process(delta: float) -> void:
 	
 
 func move_to_player():
-	velocity = movement_direction * speed
+	velocity = lerp(velocity, movement_direction * speed * 2, 1)
 	move_and_slide()
 func move_away_from_player():
 	velocity = -movement_direction * speed * 0.5
 	move_and_slide()
 func rotate_around_player(direction = PI/2):
-	velocity = movement_direction.rotated(direction) * speed * 1.5
+	velocity = movement_direction.rotated(direction) * speed 
 	
 	move_and_slide()
 
@@ -80,6 +84,9 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 
 func take_damage(damage):
 	hp-= damage
+	health_bar.value -= damage
+	if health_bar.value >= 0:
+		health_bar.show
 	$Sprite2D.set_modulate("red")
 	await get_tree().create_timer(0.2).timeout
 	if hp <= 0:
