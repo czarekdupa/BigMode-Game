@@ -51,7 +51,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("l_glove"):
 		velocity = (global_position - player_global_position).normalized() * area.owner.knockback_power * area.get_parent().get_parent().left_power
 		take_damage(area.owner.damage * area.owner.left_power)
-	elif area.is_in_group("glove"):
+	elif area.is_in_group("glove"): #1/28/2025:right now only triggers on fireball projectile
 		take_damage(area.damage)
 	_knockback_Cooldown(knockback_cooldown)
 	

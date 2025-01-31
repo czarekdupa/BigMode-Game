@@ -9,7 +9,7 @@
 radius = 52.1967
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l60ct"]
-radius = 445.36
+radius = 445.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feayr"]
 radius = 52.1967
@@ -32,7 +32,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Fire_Boss" type="CharacterBody2D" groups=["enemy"]]
+[node name="Fire_Boss" type="CharacterBody2D" groups=["boss", "enemy"]]
 light_mask = 4
 scale = Vector2(2, 2)
 collision_layer = 4
