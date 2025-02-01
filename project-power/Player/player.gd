@@ -21,9 +21,13 @@ var fire_glove = true
 @export_group("Projectiles")
 @export var projectile_scene = PackedScene
 
+@onready var health_bar = $CanvasLayer/Health_Bar
+
 func _ready() -> void:
 	$CanvasLayer/l_progressBar.max_value = max_power
 	$CanvasLayer/r_progressBar2.max_value = max_power
+	health_bar.max_value = hp
+	health_bar.value = hp
 
 func _physics_process(delta: float) -> void:
 	
@@ -101,6 +105,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 
 func take_damage(amount):
 	hp -= amount
+	health_bar.value -= damage
 	print("current hp " + str(hp))
 	set_modulate("red")
 	
