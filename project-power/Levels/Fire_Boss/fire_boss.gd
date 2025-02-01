@@ -1,9 +1,11 @@
 extends CharacterBody2D
 
 @export_category("Stats")
-@export var hp := 3
+@export var starting_hp : float = 10.0
+var hp : float = starting_hp
 @onready var health_bar = $CanvasLayer/Health_Bar
 @export var speed = 300
+var bullets : int
 
 @export var projectile_scene: PackedScene 
 @export_category("Timers")
@@ -43,10 +45,10 @@ func _physics_process(delta: float) -> void:
 				rotate_around_player(circle_direction)
 			
 		if can_shoot:
-			var bullets = randi_range(1,3)
 			$Projectile_Spawner.spawn_projectile(player.global_position, bullets)
 			can_shoot = false
 			$ProjectileTimer.start()
+			bullets = randi_range(1,2)
 		else:
 			pass
 	
@@ -87,18 +89,31 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		else:
 			take_damage(area.damage)
 
+
+func heal_health(health : float):
+	if hp <= starting_hp:
+		hp += health
+		health_bar.value = hp
+	bullets = 3
+	$Sprite2D.set_modulate("green")
+	await get_tree().create_timer(0.2).timeout
+	$Sprite2D.set_modulate(ORIGINAL_COLOR)
+	print_debug("the hp is %s " % hp)
+
 func take_damage(damage):
-	hp-= damage
-	health_bar.value -= damage
-	if health_bar.value >= 0:
-		health_bar.show
+	hp -= damage
+	health_bar.value = hp
 	$Sprite2D.set_modulate("red")
 	await get_tree().create_timer(0.2).timeout
 	if hp <= 0:
-		player.fire_glove = true
 		queue_free()
 	$Sprite2D.set_modulate(ORIGINAL_COLOR)
 	
 #physical timers-----------------------------------------------------------------------------------
 func _on_projectile_timer_timeout() -> void:
 	can_shoot = true
+
+
+func _on_heal_timer_timeout() -> void:
+	heal_health(1)
+	print_debug("timer timedout")

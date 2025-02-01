@@ -38,7 +38,6 @@ scale = Vector2(2, 2)
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_6kar8")
-hp = 10
 projectile_scene = ExtResource("2_cvyfi")
 
 [node name="Projectile_Spawner" parent="." instance=ExtResource("3_sy0kh")]
@@ -59,7 +58,7 @@ debug_color = Color(0.92549, 0.180392, 0.52549, 0.129412)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_feayr")
@@ -83,6 +82,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_18xc3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hgvh0")
 value = 100.0
 show_percentage = false
+
+[node name="heal_timer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection Area" to="." method="_on_detection_area_body_exited"]
