@@ -9,13 +9,13 @@ var original_modulate := get_modulate()
 @export var knockback_power = 1000
 @export var right_power = 0
 @export var left_power = 0
-@export var max_power = 5
+@export var max_power = 10
 @export var power_gain_speed = 0.2
 @export var power_gain_amount = 0.5
 @export var power_buffor_time = 0.2
 @export var special_ability_power_threshold = 3
 var is_charging = false
-var fire_glove = true
+var fire_glove = false
 @export_group("Projectiles")
 @export var projectile_scene = PackedScene
 
@@ -77,12 +77,12 @@ func _physics_process(delta: float) -> void:
 
 		
 func start_right_power_gain():
-	while is_charging:
+	while is_charging && right_power < max_power:
 		right_power += power_gain_amount
 		await get_tree().create_timer(power_gain_speed).timeout
 		
 func start_left_power_gain():
-	while is_charging:
+	while is_charging && left_power < max_power:
 		left_power += power_gain_amount
 		await get_tree().create_timer(power_gain_speed).timeout
 		
@@ -129,3 +129,7 @@ func take_damage(amount):
 	tween.tween_property($Camera2D,"offset", Vector2(0,0), 0.05)
 	
 	set_modulate(original_modulate)
+
+
+func _on_ok_button_down() -> void:
+	$Power_up_canvas.hide()

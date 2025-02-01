@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=33 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
 [ext_resource type="Texture2D" uid="uid://k3sps8ntwd8b" path="res://Player/Player_Sprite.png" id="2_s3k6a"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://d0amgil6dea3j" path="res://Levels/MainMenu/Over.png" id="8_sosq6"]
 [ext_resource type="Texture2D" uid="uid://cpw24b1dhora7" path="res://Levels/MainMenu/Manu.png" id="9_rmx3t"]
 [ext_resource type="Script" path="res://Levels/SceneManager.gd" id="10_ptulu"]
+[ext_resource type="Texture2D" uid="uid://phqctllbq5ql" path="res://Levels/MainMenu/PowerUp.png" id="11_e3hor"]
+[ext_resource type="Texture2D" uid="uid://csseh5xehbeyh" path="res://Player/Gloves/fire_glove.png" id="12_gtcbj"]
+[ext_resource type="Texture2D" uid="uid://ci5yxerfj7843" path="res://Levels/MainMenu/Quit.png" id="13_nuvgu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6yi2"]
 radius = 23.0
@@ -299,6 +302,97 @@ _data = {
 "game_over_srceen_anim": SubResource("Animation_vx2nq")
 }
 
+[sub_resource type="Animation" id="Animation_387er"]
+resource_name = "PowerUp_anim"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUp:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1, 1.46667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, 0.0, -0.261799, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ssbcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUp:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerUp:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glove:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_wpr55"]
+resource_name = "PowerUp_enter_anim"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUp:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(0.63728, 4, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glove:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(0.466517, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3.2, 3.2), Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qcn0o"]
+_data = {
+"PowerUp_anim": SubResource("Animation_387er"),
+"PowerUp_enter_anim": SubResource("Animation_wpr55"),
+"RESET": SubResource("Animation_ssbcn")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 12
 motion_mode = 1
@@ -325,7 +419,6 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Right_Glove_Position/RightGlove"]
-modulate = Color(0.93986, 0, 0.1428, 1)
 rotation = 1.5708
 scale = Vector2(-2, -2)
 texture = ExtResource("3_nnfv2")
@@ -347,7 +440,6 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="Left_Glove_Position/LeftGlove"]
-modulate = Color(0.93986, 0, 0.1428, 1)
 rotation = 1.5708
 scale = Vector2(2, 2)
 texture = ExtResource("3_nnfv2")
@@ -471,8 +563,41 @@ grow_horizontal = 2
 grow_vertical = 2
 icon = ExtResource("9_rmx3t")
 
+[node name="Power_up_canvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PowerUp" type="Sprite2D" parent="Power_up_canvas"]
+position = Vector2(589, 198)
+texture = ExtResource("11_e3hor")
+
+[node name="Glove" type="Sprite2D" parent="Power_up_canvas"]
+position = Vector2(579, 313)
+scale = Vector2(3, 3)
+texture = ExtResource("12_gtcbj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Power_up_canvas"]
+libraries = {
+"": SubResource("AnimationLibrary_qcn0o")
+}
+
+[node name="ok" type="Button" parent="Power_up_canvas"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 96.0
+offset_right = 269.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.694013, 0.680001)
+icon = ExtResource("13_nuvgu")
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="button_down" from="GameOverCanvas/Button" to="SceneManager" method="_on_button_button_down"]
 [connection signal="button_down" from="Esc_Canvas/Menu" to="." method="_on_menu_button_down"]
 [connection signal="button_down" from="Esc_Canvas/Menu" to="SceneManager" method="_on_menu_button_down"]
+[connection signal="button_down" from="Power_up_canvas/ok" to="." method="_on_ok_button_down"]

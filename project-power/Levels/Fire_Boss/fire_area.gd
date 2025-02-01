@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var damage_per_second : int = 2
-@export var heal_per_second : float = 0.05
+@export var heal_per_second : float = 0.5
 var deal_damage = false
 var current_player : CharacterBody2D
 var default_particles : Dictionary = {}

@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b7jovc0fgr5ph"]
+[gd_scene load_steps=16 format=3 uid="uid://b7jovc0fgr5ph"]
 
 [ext_resource type="Script" path="res://Levels/Fire_Boss/fire_boss.gd" id="1_6kar8"]
 [ext_resource type="PackedScene" uid="uid://bciusmv38b438" path="res://Enemies/fire_projectile.tscn" id="2_cvyfi"]
+[ext_resource type="Texture2D" uid="uid://csseh5xehbeyh" path="res://Player/Gloves/fire_glove.png" id="3_lyn8c"]
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_sy0kh"]
 [ext_resource type="Texture2D" uid="uid://5b2ndvtcsg4o" path="res://Levels/Fire_Boss/Fire_Boss_Sprite.png" id="3_wc7vr"]
+[ext_resource type="Texture2D" uid="uid://phqctllbq5ql" path="res://Levels/MainMenu/PowerUp.png" id="6_7v51i"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w3unp"]
 radius = 52.1967
@@ -32,6 +34,97 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="Animation" id="Animation_387er"]
+resource_name = "PowerUp_anim"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUp:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667, 1, 1.46667, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.261799, 0.0, -0.261799, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ssbcn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUp:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PowerUp:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Glove:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_wpr55"]
+resource_name = "PowerUp_enter_anim"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PowerUp:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(0.63728, 4, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glove:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.333333, 0.5),
+"transitions": PackedFloat32Array(0.466517, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(3.2, 3.2), Vector2(3, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qcn0o"]
+_data = {
+"PowerUp_anim": SubResource("Animation_387er"),
+"PowerUp_enter_anim": SubResource("Animation_wpr55"),
+"RESET": SubResource("Animation_ssbcn")
+}
+
 [node name="Fire_Boss" type="CharacterBody2D" groups=["boss", "enemy"]]
 light_mask = 4
 scale = Vector2(2, 2)
@@ -39,6 +132,7 @@ collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_6kar8")
 projectile_scene = ExtResource("2_cvyfi")
+boss_power_glove_texture = ExtResource("3_lyn8c")
 
 [node name="Projectile_Spawner" parent="." instance=ExtResource("3_sy0kh")]
 
@@ -84,6 +178,23 @@ value = 100.0
 show_percentage = false
 
 [node name="heal_timer" type="Timer" parent="."]
+
+[node name="Power_up_canvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PowerUp" type="Sprite2D" parent="Power_up_canvas"]
+position = Vector2(589, 198)
+texture = ExtResource("6_7v51i")
+
+[node name="Glove" type="Sprite2D" parent="Power_up_canvas"]
+position = Vector2(579, 313)
+scale = Vector2(3, 3)
+texture = ExtResource("3_lyn8c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Power_up_canvas"]
+libraries = {
+"": SubResource("AnimationLibrary_qcn0o")
+}
 
 [connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection Area" to="." method="_on_detection_area_body_exited"]
