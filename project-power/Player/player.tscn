@@ -307,7 +307,6 @@ projectile_scene = ExtResource("2_sc4jp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
-scale = Vector2(2, 2)
 texture = ExtResource("2_s3k6a")
 
 [node name="hitbox" type="Area2D" parent="."]

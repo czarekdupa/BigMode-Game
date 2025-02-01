@@ -1,8 +1,6 @@
 extends CharacterBody2D
 
 
-
-
 @export_group("Player Stats") 
 @export var speed := 400.0
 @export var hp := 10
