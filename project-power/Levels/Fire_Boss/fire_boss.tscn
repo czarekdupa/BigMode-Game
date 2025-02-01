@@ -9,7 +9,7 @@
 radius = 52.1967
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l60ct"]
-radius = 445.36
+radius = 445.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_feayr"]
 radius = 52.1967
@@ -32,7 +32,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="Fire_Boss" type="CharacterBody2D" groups=["enemy"]]
+[node name="Fire_Boss" type="CharacterBody2D" groups=["boss", "enemy"]]
 light_mask = 4
 scale = Vector2(2, 2)
 collision_layer = 4
@@ -40,6 +40,8 @@ motion_mode = 1
 script = ExtResource("1_6kar8")
 hp = 10
 projectile_scene = ExtResource("2_cvyfi")
+
+[node name="Projectile_Spawner" parent="." instance=ExtResource("3_sy0kh")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
@@ -64,8 +66,6 @@ shape = SubResource("CircleShape2D_feayr")
 
 [node name="ProjectileTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Projectile_Spawner" parent="." instance=ExtResource("3_sy0kh")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

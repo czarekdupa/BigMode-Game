@@ -4,8 +4,8 @@ extends CharacterBody2D
 @export var hp := 3
 @onready var health_bar = $CanvasLayer/Health_Bar
 @export var speed = 300
-@export var projectile_scene: PackedScene
-@export var keep_distance := 300
+
+@export var projectile_scene: PackedScene 
 @export_category("Timers")
 @export var fireball_timer_time := 3
 
@@ -16,7 +16,8 @@ var circle_direction = PI/2
 var can_move : bool
 var can_shoot : bool
 var player : CharacterBody2D
-	
+
+
 
 func _ready():
 	health_bar.max_value = hp
@@ -24,19 +25,21 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if player:
+		var keep_distance = $"Detection Area/CollisionShape2D".shape.radius
 		look_at(player.global_position)
 		#get distance sqrt(a^2 + b^2) = c
 		var distance_to_player = sqrt((player.global_position.x - global_position.x)*(player.global_position.x - global_position.x)
 		+(player.global_position.y - global_position.y)*(player.global_position.y - global_position.y))
+		
+		
 		if can_move:
 			movement_direction = (player.global_position - global_position).normalized()
-			if distance_to_player > keep_distance + 100:
+			if distance_to_player > keep_distance + keep_distance/4:
 				move_to_player()
-				circle_direction = PI/2
-			elif distance_to_player < keep_distance - 100:
+				circle_direction = -circle_direction
+			elif distance_to_player < keep_distance - keep_distance/4:
 				move_away_from_player()
-				circle_direction = -PI/2
-			else:
+			if (keep_distance - keep_distance/4) < distance_to_player and distance_to_player < (keep_distance + keep_distance/4):
 				rotate_around_player(circle_direction)
 			
 		if can_shoot:
@@ -50,15 +53,15 @@ func _physics_process(delta: float) -> void:
 
 func move_to_player():
 	var tween = get_tree().create_tween()
-	tween.tween_property(self,"velocity", movement_direction * speed * 2, 1)
+	tween.tween_property(self,"velocity", movement_direction * speed * 2, 0.5)
 	move_and_slide()
 func move_away_from_player():
 	var tween = get_tree().create_tween()
-	tween.tween_property(self,"velocity", -movement_direction * speed, 1)
+	tween.tween_property(self,"velocity", -movement_direction * speed * 0.9, 0.5)
 	move_and_slide()
 func rotate_around_player(direction = PI/2):
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "velocity",movement_direction.rotated(direction) * speed, 0.5)
+	tween.tween_property(self, "velocity", movement_direction.rotated(direction) * speed, 1)
 	move_and_slide()
 
 
