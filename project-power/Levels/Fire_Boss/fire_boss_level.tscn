@@ -231,198 +231,138 @@ tile_set = SubResource("TileSet_y3t82")
 
 [node name="Fire_Area2" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-1024, -96.0001)
-rotation = -3.14159
 
 [node name="Fire_Area16" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(4.83439e-06, -928)
-rotation = -3.14159
 
 [node name="Fire_Area17" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-1.0197e-06, 928)
-rotation = -3.14159
 
 [node name="Fire_Area3" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-1008, -192)
-rotation = -3.14159
 
 [node name="Fire_Area4" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-976, -288)
-rotation = -3.14159
 
 [node name="Fire_Area5" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-944, -384)
-rotation = -3.14159
 
 [node name="Fire_Area6" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-912, -480)
-rotation = -3.14159
 
 [node name="Fire_Area7" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-864, -576)
-rotation = -3.14159
 
 [node name="Fire_Area8" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-768, -672)
-rotation = -3.14159
 
 [node name="Fire_Area9" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-672, -720)
-rotation = -3.14159
 
 [node name="Fire_Area10" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-576, -768)
-rotation = -3.14159
 
 [node name="Fire_Area11" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-480, -816)
-rotation = -3.14159
 
 [node name="Fire_Area12" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-384, -848)
-rotation = -3.14159
 
 [node name="Fire_Area13" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-288, -880)
-rotation = -3.14159
 
 [node name="Fire_Area14" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-192, -912)
-rotation = -3.14159
 
 [node name="Fire_Area15" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-95.9999, -928)
-rotation = -3.14159
 
 [node name="Fire_Area18" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(1024, -96)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area19" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(1008, -192)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area20" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(976, -288)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area21" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(944, -384)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area22" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(912, -480)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area23" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(864, -576)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area24" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(768, -672)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area25" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(672, -720)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area26" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(576, -768)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area27" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(480, -816)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area28" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(384, -848)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area29" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(288, -880)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area30" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(192, -912)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area31" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(96, -928)
-scale = Vector2(3, -3)
 
 [node name="Fire_Area" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-1024, -8.95209e-05)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area32" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-1024, 95.9999)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area33" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-1008, 192)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area34" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-976, 288)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area35" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-944, 384)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area36" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-912, 480)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area37" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-864, 576)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area38" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-768, 672)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area39" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-672, 720)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area40" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-576, 768)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area41" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-480, 816)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area42" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-384, 848)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area43" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-288, 880)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area44" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-192, 912)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area45" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(-96.0001, 928)
-rotation = -3.14159
-scale = Vector2(3, -3)
 
 [node name="Fire_Area46" parent="fire ring" instance=ExtResource("2_ty128")]
 position = Vector2(1024, 0)

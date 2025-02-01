@@ -41,6 +41,8 @@ script = ExtResource("1_6kar8")
 hp = 10
 projectile_scene = ExtResource("2_cvyfi")
 
+[node name="Projectile_Spawner" parent="." instance=ExtResource("3_sy0kh")]
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = ExtResource("3_wc7vr")
@@ -64,8 +66,6 @@ shape = SubResource("CircleShape2D_feayr")
 
 [node name="ProjectileTimer" type="Timer" parent="."]
 one_shot = true
-
-[node name="Projectile_Spawner" parent="." instance=ExtResource("3_sy0kh")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
