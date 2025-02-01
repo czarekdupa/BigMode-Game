@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://ceqt3s2smvgx0"]
+
+[ext_resource type="Texture2D" uid="uid://c00tqhw7co22p" path="res://Levels/MainMenu/MainMenuBackground.png" id="1_qg2cg"]
+[ext_resource type="Texture2D" uid="uid://buvqammd6ymhe" path="res://Levels/MainMenu/Power.png" id="2_b0ohc"]
+[ext_resource type="Texture2D" uid="uid://tpwuynhyh72a" path="res://Levels/MainMenu/Punch.png" id="3_xrigh"]
+[ext_resource type="Script" path="res://Levels/SceneManager.gd" id="4_37kkk"]
+[ext_resource type="Texture2D" uid="uid://oppvpofshwv" path="res://Levels/MainMenu/Start.png" id="4_ltwb6"]
+[ext_resource type="Texture2D" uid="uid://ci5yxerfj7843" path="res://Levels/MainMenu/Quit.png" id="6_8lufa"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(598, 379)
+texture = ExtResource("1_qg2cg")
+
+[node name="Power" type="Sprite2D" parent="."]
+position = Vector2(406, 215)
+texture = ExtResource("2_b0ohc")
+
+[node name="Punch" type="Sprite2D" parent="."]
+position = Vector2(755, 214)
+texture = ExtResource("3_xrigh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("4_37kkk")
+
+[node name="Start" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -173.0
+offset_top = 24.0
+offset_right = 173.0
+offset_bottom = 109.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("4_ltwb6")
+
+[node name="Quit" type="Button" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -201.5
+offset_top = 144.0
+offset_right = 201.5
+offset_bottom = 234.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("6_8lufa")
+
+[connection signal="button_down" from="CanvasLayer/Start" to="CanvasLayer" method="_on_start_button_down"]
+[connection signal="button_down" from="CanvasLayer/Quit" to="CanvasLayer" method="_on_quit_button_down"]
