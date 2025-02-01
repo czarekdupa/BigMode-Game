@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var damage_per_second : int = 2
+@export var heal_per_second : float = 0.05
 var deal_damage = false
 var current_player : CharacterBody2D
 var default_particles : Dictionary = {}
@@ -14,6 +15,7 @@ func _ready() -> void:
 	default_particles.speed_scale = $fire_particles.speed_scale
 	default_particles.life_time = $fire_particles.lifetime
 	default_particles.amount = $fire_particles.amount
+	
 func _process(delta: float) -> void:
 	if has_boss:
 		$fire_particles.direction = (boss.global_position - global_position).normalized()
@@ -32,6 +34,11 @@ func _on_area_exited(area: Area2D) -> void:
 func _on_timer_timeout() -> void:
 	current_player.take_damage(damage_per_second)
 	print("took " + str(damage_per_second) + " damage from" + $".".name)
+	
+func _on_heal_timer_timeout() -> void:
+	#heals boss
+	if boss:
+		boss.heal_health(heal_per_second/ $heal_timer.wait_time)
 
 #boss detection
 func _on_boss_detector_body_entered(body: Node2D) -> void:
@@ -40,8 +47,10 @@ func _on_boss_detector_body_entered(body: Node2D) -> void:
 		$fire_particles.speed_scale = 7
 		$fire_particles.lifetime = 12
 		$fire_particles.amount = 200
-		has_boss = true
 		boss = body
+		has_boss = true
+		
+		$heal_timer.start()
 
 func _on_boss_detector_body_exited(body: Node2D) -> void:
 	if body.is_in_group("boss"):
@@ -50,4 +59,5 @@ func _on_boss_detector_body_exited(body: Node2D) -> void:
 		$fire_particles.speed_scale = default_particles.speed_scale
 		$fire_particles.lifetime = default_particles.life_time
 		$fire_particles.amount = default_particles.amount
-	pass
+		
+		$heal_timer.stop()
