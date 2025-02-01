@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export_category("Stats")
-@export var starting_hp : float = 10.0
+@export var starting_hp : float = 50
 var hp : float = starting_hp
 @onready var health_bar = $CanvasLayer/Health_Bar
 @export var speed = 300
@@ -10,6 +10,7 @@ var bullets : int
 @export var projectile_scene: PackedScene 
 @export_category("Timers")
 @export var fireball_timer_time := 3
+@export var boss_power_glove_texture: CompressedTexture2D
 
 var ORIGINAL_COLOR = modulate
 
@@ -83,9 +84,14 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 #DETECTS IF HIT BY PLAYER
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	if area.is_in_group("glove"):
+	if area.is_in_group("r_glove"):
 		if area.owner:
-			take_damage(area.owner.damage)
+			take_damage(area.owner.damage * area.owner.right_power)
+		else:
+			take_damage(area.damage)
+	if area.is_in_group("l_glove"):
+		if area.owner:
+			take_damage(area.owner.damage * area.owner.left_power)
 		else:
 			take_damage(area.damage)
 
@@ -106,6 +112,13 @@ func take_damage(damage):
 	$Sprite2D.set_modulate("red")
 	await get_tree().create_timer(0.2).timeout
 	if hp <= 0:
+		player.fire_glove = true;
+		Sprite2D
+		player.get_child(2).get_child(0).get_child(0).texture = boss_power_glove_texture
+		player.get_child(11).show()
+		player.get_child(11).get_child(2).play("PowerUp_enter_anim")
+		await get_tree().create_timer(player.get_child(11).get_child(2).current_animation_length).timeout
+		player.get_child(11).get_child(2).play("PowerUp_anim")
 		queue_free()
 	$Sprite2D.set_modulate(ORIGINAL_COLOR)
 	
