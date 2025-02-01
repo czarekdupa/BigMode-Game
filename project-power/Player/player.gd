@@ -11,7 +11,7 @@ var original_modulate := get_modulate()
 @export var knockback_power = 1000
 @export var right_power = 0
 @export var left_power = 0
-@export var max_power = 100
+@export var max_power = 5
 @export var power_gain_speed = 0.2
 @export var power_gain_amount = 0.5
 @export var power_buffor_time = 0.2
@@ -22,6 +22,8 @@ var fire_glove = true
 @export var projectile_scene = PackedScene
 
 @onready var health_bar = $CanvasLayer/Health_Bar
+
+var playerDead = false;
 
 func _ready() -> void:
 	$CanvasLayer/l_progressBar.max_value = max_power
@@ -66,6 +68,13 @@ func _physics_process(delta: float) -> void:
 		reset_left_power_with_buffor()
 		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
 		
+		
+	if Input.is_action_just_released("esc"):
+		if $Esc_Canvas.visible == true:
+			$Esc_Canvas.hide()
+		elif $Esc_Canvas.visible == false:
+			$Esc_Canvas.show()
+		
 	move_and_slide()
 
 		
@@ -106,6 +115,10 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func take_damage(amount):
 	hp -= amount
 	health_bar.value -= damage
+	if hp <= 0 && !playerDead:
+		$GameOverCanvas.show()
+		$GameOverCanvas/AnimationPlayer.play("game_over_srceen_anim")
+		playerDead = true
 	print("current hp " + str(hp))
 	set_modulate("red")
 	
