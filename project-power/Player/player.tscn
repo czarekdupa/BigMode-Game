@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=54 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
 [ext_resource type="Texture2D" uid="uid://k3sps8ntwd8b" path="res://Player/Player_Sprite.png" id="2_s3k6a"]
@@ -16,15 +16,18 @@
 [ext_resource type="Script" path="res://Levels/SceneManager.gd" id="10_ptulu"]
 [ext_resource type="Texture2D" uid="uid://phqctllbq5ql" path="res://Levels/MainMenu/PowerUp.png" id="11_e3hor"]
 [ext_resource type="Texture2D" uid="uid://csseh5xehbeyh" path="res://Player/Gloves/fire_glove.png" id="12_gtcbj"]
-[ext_resource type="Texture2D" uid="uid://ci5yxerfj7843" path="res://Levels/MainMenu/Quit.png" id="13_nuvgu"]
 [ext_resource type="AudioStream" uid="uid://bj53qqvpmi1or" path="res://Sounds/upgrade.mp3" id="17_3a5x7"]
 [ext_resource type="AudioStream" uid="uid://dajfdd123s4lc" path="res://Sounds/snare.mp3" id="17_15vbl"]
+[ext_resource type="Texture2D" uid="uid://c3pqqijkbi3ol" path="res://Levels/MainMenu/Next.png" id="17_ijxhb"]
 [ext_resource type="AudioStream" uid="uid://dh78e44m3tykt" path="res://Sounds/Bell_singal.mp3" id="17_lfa4h"]
 [ext_resource type="AudioStream" uid="uid://bqt62m3h8thbx" path="res://Sounds/woosh.mp3" id="18_21j45"]
 [ext_resource type="AudioStream" uid="uid://bhpfsr4xn51df" path="res://Sounds/Game Over.wav" id="19_pssvv"]
 [ext_resource type="AudioStream" uid="uid://dfse021kaagfc" path="res://Sounds/grunt.mp3" id="19_u8mch"]
 [ext_resource type="AudioStream" uid="uid://campwpf0swnn7" path="res://Sounds/game_over_sound.mp3" id="20_7vm0l"]
 [ext_resource type="AudioStream" uid="uid://hpworhs7pw11" path="res://Sounds/KotoVIbes-Song.wav" id="25_khc7v"]
+[ext_resource type="Texture2D" uid="uid://bqvrw0vc7c8vg" path="res://Levels/MainMenu/You_win.png" id="26_4nhaq"]
+[ext_resource type="Texture2D" uid="uid://cx4n1e7mxobdc" path="res://Levels/MainMenu/ThankYou.png" id="27_g7kr5"]
+[ext_resource type="AudioStream" uid="uid://dvvuafkut0w1x" path="res://Sounds/Win.mp3" id="28_u5ul4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6yi2"]
 radius = 23.0
@@ -785,7 +788,6 @@ grow_vertical = 2
 icon = ExtResource("9_rmx3t")
 
 [node name="Power_up_canvas" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="PowerUp" type="Sprite2D" parent="Power_up_canvas"]
 position = Vector2(589, 124)
@@ -828,7 +830,7 @@ offset_bottom = 186.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.694013, 0.680001)
-icon = ExtResource("13_nuvgu")
+icon = ExtResource("17_ijxhb")
 
 [node name="Upgrade_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_3a5x7")
@@ -860,6 +862,90 @@ volume_db = -20.0
 stream = ExtResource("25_khc7v")
 volume_db = -20.0
 
+[node name="WinCanvas" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PowerUp" type="Sprite2D" parent="WinCanvas"]
+position = Vector2(589, 98)
+texture = ExtResource("26_4nhaq")
+
+[node name="Glove" type="Sprite2D" parent="WinCanvas"]
+position = Vector2(579, 289)
+scale = Vector2(3, 3)
+texture = ExtResource("27_g7kr5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WinCanvas"]
+libraries = {
+"": SubResource("AnimationLibrary_qcn0o")
+}
+
+[node name="Next_level" type="Button" parent="WinCanvas"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 96.0
+offset_right = 269.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.694013, 0.680001)
+icon = ExtResource("9_rmx3t")
+
+[node name="Win_sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(579, 289)
+scale = Vector2(0.5, 0.5)
+stream = ExtResource("28_u5ul4")
+
+[node name="Power_up_canvas2" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="PowerUp" type="Sprite2D" parent="Power_up_canvas2"]
+position = Vector2(589, 124)
+texture = ExtResource("11_e3hor")
+
+[node name="Glove" type="Sprite2D" parent="Power_up_canvas2"]
+position = Vector2(579, 236)
+scale = Vector2(3, 3)
+texture = ExtResource("3_p44a0")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Power_up_canvas2"]
+libraries = {
+"": SubResource("AnimationLibrary_qcn0o")
+}
+
+[node name="Label" type="Label" parent="Power_up_canvas2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -242.0
+offset_top = 21.0
+offset_right = 242.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Let's you put down a blue shield that protects you from bullets
+"
+
+[node name="Next_level_2" type="Button" parent="Power_up_canvas2"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -134.0
+offset_top = 96.0
+offset_right = 269.0
+offset_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.694013, 0.680001)
+icon = ExtResource("17_ijxhb")
+
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Right_Glove_Position/RightGlove" to="." method="_on_right_glove_body_entered"]
@@ -869,3 +955,8 @@ volume_db = -20.0
 [connection signal="button_down" from="Esc_Canvas/Menu" to="SceneManager" method="_on_menu_button_down"]
 [connection signal="button_down" from="Power_up_canvas/Next_level" to="." method="_on_ok_button_down"]
 [connection signal="button_down" from="Power_up_canvas/Next_level" to="SceneManager" method="_on_next_level_button_down"]
+[connection signal="button_down" from="WinCanvas/Next_level" to="." method="_on_ok_button_down"]
+[connection signal="button_down" from="WinCanvas/Next_level" to="SceneManager" method="_on_next_level_button_down"]
+[connection signal="button_down" from="Power_up_canvas2/Next_level_2" to="." method="_on_ok_button_down"]
+[connection signal="button_down" from="Power_up_canvas2/Next_level_2" to="SceneManager" method="_on_next_level_button_down"]
+[connection signal="button_down" from="Power_up_canvas2/Next_level_2" to="SceneManager" method="_on_next_level_2_button_down"]

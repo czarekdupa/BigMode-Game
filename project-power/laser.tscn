@@ -22,6 +22,7 @@ height = 74.0
 position = Vector2(758, 266)
 collision_layer = 72
 script = ExtResource("1_yj8gi")
+damage = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_1r5b7")

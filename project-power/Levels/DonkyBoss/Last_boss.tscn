@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dikeoabpjq6by"]
+[gd_scene load_steps=12 format=3 uid="uid://dikeoabpjq6by"]
 
 [ext_resource type="Script" path="res://Levels/DonkyBoss/last_boss.gd" id="1_nuvan"]
 [ext_resource type="PackedScene" uid="uid://cmmhkf4q42bqq" path="res://laser.tscn" id="2_2fk0o"]
 [ext_resource type="Texture2D" uid="uid://dknbkpwtbdkpq" path="res://Levels/DonkyBoss/donkey_idle spirtes.png" id="2_iq58e"]
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_4face"]
+[ext_resource type="AudioStream" uid="uid://dvvuafkut0w1x" path="res://Sounds/Win.mp3" id="5_sj5y3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddnps"]
 radius = 7.88456
@@ -92,6 +93,9 @@ value = 100.0
 show_percentage = false
 
 [node name="Projectile_Spawner" parent="." instance=ExtResource("3_4face")]
+
+[node name="WinSoundEffect" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_sj5y3")
 
 [connection signal="area_entered" from="HitboxArea" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

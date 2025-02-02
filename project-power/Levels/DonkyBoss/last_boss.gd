@@ -164,12 +164,9 @@ func take_damage(damage):
 		hp -= damage
 		health_bar.value = hp
 		if hp <= 0:
-			player.fire_glove = true;
-			#player.get_child(2).get_child(0).get_child(0).texture = boss_power_glove_texture
-			player.get_child(11).show()
-			player.get_child(11).get_child(2).play("PowerUp_enter_anim")
-			await get_tree().create_timer(player.get_child(11).get_child(2).current_animation_length).timeout
-			player.get_child(11).get_child(2).play("PowerUp_anim")
+			player.win_sound.play()
+			player.playerDead = true
+			player.get_child(20).show()
 			queue_free()
 		
 	$BossSprite.set_modulate("red")
