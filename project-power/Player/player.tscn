@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=42 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
 [ext_resource type="Texture2D" uid="uid://k3sps8ntwd8b" path="res://Player/Player_Sprite.png" id="2_s3k6a"]
@@ -6,7 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://bog1gsa4u6s3e" path="res://Player/Gloves/Glove_Sprite.png" id="3_nnfv2"]
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="4_rfn2t"]
 [ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="6_6l3tk"]
+[ext_resource type="Texture2D" uid="uid://doxqaw66kwrna" path="res://Player/PowerMeter_background.png" id="6_hybua"]
+[ext_resource type="Texture2D" uid="uid://b4qm1ciyeq350" path="res://Player/PowerMeter.png" id="7_5oywg"]
 [ext_resource type="Texture2D" uid="uid://c4bv1qogmosby" path="res://Levels/MainMenu/Game.png" id="7_wa7na"]
+[ext_resource type="Texture2D" uid="uid://dedncfaduit4r" path="res://Player/Numbers.png" id="8_60chk"]
 [ext_resource type="Texture2D" uid="uid://d0amgil6dea3j" path="res://Levels/MainMenu/Over.png" id="8_sosq6"]
 [ext_resource type="Texture2D" uid="uid://cpw24b1dhora7" path="res://Levels/MainMenu/Manu.png" id="9_rmx3t"]
 [ext_resource type="Script" path="res://Levels/SceneManager.gd" id="10_ptulu"]
@@ -117,14 +120,8 @@ _data = {
 "right_glove_anim": SubResource("Animation_2n806")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iytym"]
-bg_color = Color(1, 1, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnb1h"]
-bg_color = Color(1, 1, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qnt53"]
-bg_color = Color(0.572549, 0, 0, 1)
+bg_color = Color(0.133333, 0.12549, 0.203922, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -135,11 +132,165 @@ shadow_color = Color(0.403922, 0.172549, 0.0627451, 0.529412)
 shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_636en"]
-bg_color = Color(7.58059e-06, 0.566948, 0.111356, 1)
+bg_color = Color(0.415686, 0.745098, 0.188235, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iytym"]
+bg_color = Color(1, 1, 0, 1)
+
+[sub_resource type="Animation" id="Animation_p101j"]
+resource_name = "power_meter_number_1_enter_anim"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.164939, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3vgjn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_kcty4"]
+resource_name = "power_meter_number_2_enter_anim"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.164939, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_pxdmv"]
+resource_name = "power_meter_number_3_enter_anim"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.164939, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_da0tw"]
+resource_name = "power_Meter_number_4_enter_anim"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.164939, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kkcvk"]
+_data = {
+"RESET": SubResource("Animation_3vgjn"),
+"power_Meter_number_4_enter_anim": SubResource("Animation_da0tw"),
+"power_meter_number_1_enter_anim": SubResource("Animation_p101j"),
+"power_meter_number_2_enter_anim": SubResource("Animation_kcty4"),
+"power_meter_number_3_enter_anim": SubResource("Animation_pxdmv")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lnb1h"]
+bg_color = Color(1, 1, 0, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_iitwp"]
 font_names = PackedStringArray("THE JACATRA")
@@ -463,35 +614,66 @@ shape = SubResource("CircleShape2D_d6yi2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="l_progressBar" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 21.0
-offset_top = 498.0
-offset_right = 430.0
-offset_bottom = 525.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_iytym")
-value = 50.0
-
-[node name="r_progressBar2" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 724.0
-offset_top = 499.0
-offset_right = 1133.0
-offset_bottom = 526.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_lnb1h")
-
 [node name="Health_Bar" type="ProgressBar" parent="CanvasLayer"]
-anchors_preset = 5
+anchors_preset = 7
 anchor_left = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-offset_left = -304.0
-offset_top = 571.0
-offset_right = 304.0
-offset_bottom = 603.0
+anchor_bottom = 1.0
+offset_left = -396.0
+offset_top = -62.0
+offset_right = 212.0
+offset_bottom = -30.0
 grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.28, 1)
 size_flags_horizontal = 4
 theme_override_styles/background = SubResource("StyleBoxFlat_qnt53")
 theme_override_styles/fill = SubResource("StyleBoxFlat_636en")
 value = 100.0
 show_percentage = false
+
+[node name="Left_Meter" type="Node2D" parent="CanvasLayer"]
+position = Vector2(42, 56)
+scale = Vector2(0.88, 1)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer/Left_Meter"]
+position = Vector2(238, 509)
+scale = Vector2(0.84, 0.84)
+texture = ExtResource("6_hybua")
+
+[node name="l_progressBar" type="ProgressBar" parent="CanvasLayer/Left_Meter"]
+offset_left = 129.545
+offset_top = 500.0
+offset_right = 436.545
+offset_bottom = 527.0
+scale = Vector2(0.8, 0.8)
+theme_override_styles/fill = SubResource("StyleBoxFlat_iytym")
+value = 50.0
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Left_Meter"]
+position = Vector2(238, 509)
+scale = Vector2(0.84, 0.84)
+texture = ExtResource("7_5oywg")
+
+[node name="Numbers" type="Sprite2D" parent="CanvasLayer/Left_Meter"]
+position = Vector2(344.318, 501)
+texture = ExtResource("8_60chk")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Left_Meter"]
+root_node = NodePath("../Numbers")
+libraries = {
+"": SubResource("AnimationLibrary_kkcvk")
+}
+
+[node name="r_progressBar2" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 722.0
+offset_top = 559.0
+offset_right = 1131.0
+offset_bottom = 586.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_lnb1h")
 
 [node name="GameOverCanvas" type="CanvasLayer" parent="."]
 visible = false
