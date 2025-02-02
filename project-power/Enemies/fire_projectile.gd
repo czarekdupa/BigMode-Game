@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed = 500
-@export var damage = 1
+@export var damage: float = 1
 
 var time_since_spawn : int
 

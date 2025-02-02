@@ -78,6 +78,8 @@ esc={
 2d_physics/layer_4="enemy_projectile"
 2d_physics/layer_5="fire_area"
 2d_physics/layer_6="Walls"
+2d_physics/layer_7="laser"
+2d_physics/layer_8="player_projectile"
 
 [rendering]
 
