@@ -26,6 +26,7 @@ texture = ExtResource("2_epwwa")
 shape = SubResource("RectangleShape2D_gjogx")
 
 [node name="Detection Area" type="Area2D" parent="."]
+scale = Vector2(1.92, 1.84)
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Detection Area"]

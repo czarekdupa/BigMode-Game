@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dikeoabpjq6by"]
+
+[ext_resource type="Script" path="res://Levels/DonkyBoss/last_boss.gd" id="1_nuvan"]
+[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_o4xhm"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l5clj"]
+
+[node name="LastBoss" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_nuvan")
+
+[node name="BossSprite" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_o4xhm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(12.16, 11.72)
+shape = SubResource("CircleShape2D_l5clj")

@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba7b1vp0uvw6i"]
+
+[ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_45wwj"]
+[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_37il4"]
+[ext_resource type="Script" path="res://Levels/DonkyBoss/statue.gd" id="3_0cmqn"]
+[ext_resource type="PackedScene" uid="uid://bciusmv38b438" path="res://Enemies/fire_projectile.tscn" id="4_jr11d"]
+[ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="4_rnijq"]
+[ext_resource type="PackedScene" uid="uid://cg1xrerdnsyb" path="res://Player/Shield.tscn" id="6_qia66"]
+
+[node name="LastBossLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_45wwj")]
+position = Vector2(394, 229)
+speed = null
+hp = null
+damage = null
+knockback_power = null
+right_power = null
+left_power = null
+max_power = null
+power_gain_speed = null
+power_gain_amount = null
+power_buffor_time = null
+special_ability_power_threshold = null
+
+[node name="statue" type="Sprite2D" parent="."]
+position = Vector2(-19, 275)
+texture = ExtResource("2_37il4")
+script = ExtResource("3_0cmqn")
+projectile_scene = ExtResource("4_jr11d")
+
+[node name="Projectile_Spawner" parent="statue" instance=ExtResource("4_rnijq")]
+
+[node name="Area2D" parent="." instance=ExtResource("6_qia66")]
