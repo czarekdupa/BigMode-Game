@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dikeoabpjq6by"]
+[gd_scene load_steps=11 format=3 uid="uid://dikeoabpjq6by"]
 
 [ext_resource type="Script" path="res://Levels/DonkyBoss/last_boss.gd" id="1_nuvan"]
+[ext_resource type="PackedScene" uid="uid://cmmhkf4q42bqq" path="res://laser.tscn" id="2_2fk0o"]
 [ext_resource type="Texture2D" uid="uid://dknbkpwtbdkpq" path="res://Levels/DonkyBoss/donkey_idle spirtes.png" id="2_iq58e"]
+[ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_4face"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddnps"]
 radius = 7.88456
@@ -34,6 +36,7 @@ corner_radius_bottom_left = 8
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_nuvan")
+projectile_scene = ExtResource("2_2fk0o")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
 scale = Vector2(1.2, 1.28)
@@ -57,7 +60,7 @@ shape = SubResource("CircleShape2D_l5clj")
 [node name="HitboxArea" type="Area2D" parent="."]
 scale = Vector2(0.48, 1)
 collision_layer = 4
-collision_mask = 2
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
 scale = Vector2(11.88, 11.44)
@@ -86,6 +89,8 @@ theme_override_styles/background = SubResource("StyleBoxFlat_4potd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_b7irm")
 value = 100.0
 show_percentage = false
+
+[node name="Projectile_Spawner" parent="." instance=ExtResource("3_4face")]
 
 [connection signal="area_entered" from="HitboxArea" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]

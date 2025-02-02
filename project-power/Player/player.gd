@@ -3,13 +3,18 @@ extends CharacterBody2D
 
 @export_group("Player Stats") 
 @export var speed := 400.0
-@export var hp := 10
+@export var hp : float = 1
 var original_modulate := get_modulate()
 @export var damage := 1
 @export var knockback_power = 300
+@onready var power_meter_snere_sound: AudioStreamPlayer2D = $Power_Meter_snere_sound
+@onready var power_mete_bell_sound: AudioStreamPlayer2D = $Power_mete_bell_sound
+
 
 @export var right_power = 0
+@export var right_power_current_treshold = 0
 @export var left_power = 0
+@export var left_power_current_treshold = 0
 @export var max_power = 100
 @export var power_gain_speed = 0.2
 @export var power_gain_amount = 10
@@ -100,16 +105,29 @@ func start_right_power_gain():
 		right_power += power_gain_amount
 		if right_power >= first_power_threshold && current_threshold == 0:
 			current_threshold = 1
+			right_power_current_treshold = 1
 			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_meter_number_1_enter_anim")
+			power_meter_snere_sound.pitch_scale = 1
+			power_meter_snere_sound.play()
 		if right_power >= second_power_threshold && current_threshold == 1:
 			current_threshold = 2 
+			right_power_current_treshold = 2
 			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_meter_number_2_enter_anim")
+			power_meter_snere_sound.pitch_scale += 0.1
+			power_meter_snere_sound.play()
 		if right_power >= third_power_threshold && current_threshold == 2:
 			current_threshold = 3
+			right_power_current_treshold = 3
 			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_meter_number_3_enter_anim")
+			power_meter_snere_sound.pitch_scale += 0.1
+			power_meter_snere_sound.play()
 		if right_power >= forth_power_threshold && current_threshold == 3:
 			current_threshold = 4
+			right_power_current_treshold = 4
 			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_Meter_number_4_enter_anim")
+			power_meter_snere_sound.pitch_scale += 0.2
+			power_meter_snere_sound.play()
+			power_mete_bell_sound.play()
 		await get_tree().create_timer(power_gain_speed).timeout
 		
 func start_left_power_gain():
@@ -118,15 +136,19 @@ func start_left_power_gain():
 		left_power += power_gain_amount
 		if left_power >= first_power_threshold && current_threshold == 0:
 			current_threshold = 1
+			left_power_current_treshold = 1
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_meter_number_1_enter_anim")
 		if left_power >= second_power_threshold && current_threshold == 1:
 			current_threshold = 2 
+			left_power_current_treshold = 2
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_meter_number_2_enter_anim")
 		if left_power >= third_power_threshold && current_threshold == 2:
 			current_threshold = 3
+			left_power_current_treshold = 3
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_meter_number_3_enter_anim")
 		if left_power >= forth_power_threshold && current_threshold == 3:
 			current_threshold = 4
+			left_power_current_treshold = 4
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_Meter_number_4_enter_anim")
 			
 		await get_tree().create_timer(power_gain_speed).timeout
@@ -134,10 +156,12 @@ func start_left_power_gain():
 func reset_right_power_with_buffor():
 	await get_tree().create_timer(power_buffor_time).timeout
 	right_power = 0
+	right_power_current_treshold = 0
 	
 func reset_left_power_with_buffor():
 	await get_tree().create_timer(power_buffor_time).timeout
 	left_power = 0
+	left_power_current_treshold = 0
 
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
@@ -147,6 +171,8 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("fire_area"):
 		take_damage(area.damage_per_second)
+	if area.is_in_group("laser"):
+		take_damage(area.damage)
 	elif area.owner:
 		if area.owner.damage:
 			take_damage(area.owner.damage)

@@ -25,3 +25,7 @@ func _on_quit_button_down() -> void:
 
 func _on_menu_button_down() -> void:
 	get_tree().change_scene_to_file("res://Levels/MainMenu/MainMenu.tscn")
+
+
+func _on_next_level_button_down() -> void:
+	get_tree().change_scene_to_file("res://Levels/Moai_Boss/moai_boss_level.tscn")

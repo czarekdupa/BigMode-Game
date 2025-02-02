@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://c6fu73lagb568" path="res://Levels/Fire_Boss/tiles/ground_floor.png" id="2_vyldg"]
 [ext_resource type="Texture2D" uid="uid://c7m0qy1v226ku" path="res://Levels/Fire_Boss/tiles/brick platform.png" id="4_j8tas"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g04os"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x404c"]
 texture = ExtResource("2_vyldg")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -91,9 +91,9 @@ tile_size = Vector2i(64, 64)
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "ground"
 terrain_set_0/terrain_0/color = Color(0.454635, 0.229889, 0.291008, 1)
-sources/0 = SubResource("TileSetAtlasSource_g04os")
+sources/0 = SubResource("TileSetAtlasSource_x404c")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17jj5"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_36koi"]
 texture = ExtResource("4_j8tas")
 texture_region_size = Vector2i(64, 64)
 2:0/0 = 0
@@ -305,7 +305,7 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Auto_brick_platform"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 navigation_layer_0/layers = 1
-sources/0 = SubResource("TileSetAtlasSource_17jj5")
+sources/0 = SubResource("TileSetAtlasSource_36koi")
 
 [node name="Fire_Boss_Level" type="Node2D"]
 
