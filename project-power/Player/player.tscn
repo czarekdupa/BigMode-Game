@@ -1,9 +1,10 @@
-[gd_scene load_steps=49 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=51 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
 [ext_resource type="Texture2D" uid="uid://k3sps8ntwd8b" path="res://Player/Player_Sprite.png" id="2_s3k6a"]
 [ext_resource type="PackedScene" uid="uid://cydjhi0cnkrs0" path="res://Enemies/player_fire_projectile.tscn" id="2_sc4jp"]
 [ext_resource type="Texture2D" uid="uid://bog1gsa4u6s3e" path="res://Player/Gloves/Glove_Sprite.png" id="3_nnfv2"]
+[ext_resource type="Texture2D" uid="uid://c5kwl3rywim5m" path="res://Levels/Moai_Boss/shield_glove.png" id="3_p44a0"]
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="4_rfn2t"]
 [ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="6_6l3tk"]
 [ext_resource type="Texture2D" uid="uid://doxqaw66kwrna" path="res://Player/PowerMeter_background.png" id="6_hybua"]
@@ -23,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://bhpfsr4xn51df" path="res://Sounds/Game Over.wav" id="19_pssvv"]
 [ext_resource type="AudioStream" uid="uid://dfse021kaagfc" path="res://Sounds/grunt.mp3" id="19_u8mch"]
 [ext_resource type="AudioStream" uid="uid://campwpf0swnn7" path="res://Sounds/game_over_sound.mp3" id="20_7vm0l"]
+[ext_resource type="AudioStream" uid="uid://hpworhs7pw11" path="res://Sounds/KotoVIbes-Song.wav" id="25_khc7v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6yi2"]
 radius = 23.0
@@ -557,6 +559,8 @@ collision_mask = 44
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_6vd06")
+fire_glove_texture = ExtResource("12_gtcbj")
+shield_glove_texture = ExtResource("3_p44a0")
 projectile_scene = ExtResource("2_sc4jp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -850,6 +854,10 @@ volume_db = -10.0
 
 [node name="Power_mete_bell_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_lfa4h")
+volume_db = -20.0
+
+[node name="Music_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("25_khc7v")
 volume_db = -20.0
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

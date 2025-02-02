@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export_group("Player Stats") 
 @export var speed := 400.0
-@export var hp : float = 10
+@export var hp : float = 100
 var original_modulate := get_modulate()
 @export var damage := 1
 @export var knockback_power = 300
@@ -14,6 +14,10 @@ var original_modulate := get_modulate()
 @onready var game_over_voice: AudioStreamPlayer2D = $Game_over_voice
 @onready var game_over_sound: AudioStreamPlayer2D = $Game_over_sound
 @onready var upgrade_sound: AudioStreamPlayer2D = $Upgrade_sound
+@onready var music_sound: AudioStreamPlayer2D = $Music_sound
+
+@export var fire_glove_texture: CompressedTexture2D
+@export var shield_glove_texture: CompressedTexture2D
 
 
 @export var right_power = 0
@@ -34,8 +38,8 @@ var forth_power_threshold = 90
 
 
 var is_charging = false
-var fire_glove = true
-var shield_glove = true
+var fire_glove = false
+var shield_glove = false
 @export_group("Projectiles")
 @export var projectile_scene = PackedScene
 var shield_scene = preload("res://Player/Shield.tscn")
@@ -50,60 +54,68 @@ func _ready() -> void:
 	$CanvasLayer/Right_Meter/r_progressBar2.max_value = max_power
 	health_bar.max_value = hp
 	health_bar.value = hp
+	shield_glove = get_parent().get_node("player_upgrades_data").shield_glove
+	fire_glove = get_parent().get_node("player_upgrades_data").fire_glove
+	music_sound.play()
+	
+	if fire_glove == true:
+		get_child(2).get_child(0).get_child(0).texture = fire_glove_texture
+	if shield_glove == true:
+		get_child(3).get_child(0).get_child(0).texture = shield_glove_texture
 
 func _physics_process(delta: float) -> void:
-	
-	var horizontal_movemoent := Input.get_axis("left", "right")
-	var vertical_movement := Input.get_axis("up","down")
-	
-	if horizontal_movemoent or vertical_movement:
-		velocity = Vector2(horizontal_movemoent, vertical_movement).normalized() * speed
-	else:
-		velocity = Vector2(0,0)
-	
-	look_at(get_global_mouse_position())
-	
-	$CanvasLayer/Right_Meter/r_progressBar2.value = right_power
-	$CanvasLayer/Left_Meter/l_progressBar.value = left_power
-	
-	if Input.is_action_just_pressed("right_click"):
-		is_charging = true
-		start_right_power_gain()
-		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_windup_anim")
-		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_loop_anim")
-	if Input.is_action_just_released("right_click"):
-		is_charging = false
-		reset_right_power_with_buffor()
-		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
-		atack_sound.play()
-		if fire_glove == true && right_power >= special_ability_power_threshold:
-			$Projectile_Spawner.spawn_projectile(get_global_mouse_position(), 1)
+	if !playerDead:
+		var horizontal_movemoent := Input.get_axis("left", "right")
+		var vertical_movement := Input.get_axis("up","down")
 		
-	if Input.is_action_just_pressed("left_click"):
-		is_charging = true
-		start_left_power_gain()
-		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_windup_anim")
-		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_loop_anim")
-	if Input.is_action_just_released("left_click"):
-		is_charging = false
-		reset_left_power_with_buffor()
-		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
-		atack_sound.play()
-		if shield_glove == true && left_power >= special_ability_power_threshold:
-			var new_shield = shield_scene.instantiate()
-			new_shield.global_position = (global_position + (get_global_mouse_position() - 
-			global_position).normalized() * shield_spawn_distance)
-			new_shield.global_rotation = global_rotation
-			get_parent().add_child(new_shield)
+		if horizontal_movemoent or vertical_movement:
+			velocity = Vector2(horizontal_movemoent, vertical_movement).normalized() * speed
+		else:
+			velocity = Vector2(0,0)
 		
+		look_at(get_global_mouse_position())
 		
-	if Input.is_action_just_released("esc"):
-		if $Esc_Canvas.visible == true:
-			$Esc_Canvas.hide()
-		elif $Esc_Canvas.visible == false:
-			$Esc_Canvas.show()
+		$CanvasLayer/Right_Meter/r_progressBar2.value = right_power
+		$CanvasLayer/Left_Meter/l_progressBar.value = left_power
 		
-	move_and_slide()
+		if Input.is_action_just_pressed("right_click"):
+			is_charging = true
+			start_right_power_gain()
+			$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_windup_anim")
+			$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("charge_up_loop_anim")
+		if Input.is_action_just_released("right_click"):
+			is_charging = false
+			reset_right_power_with_buffor()
+			$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
+			atack_sound.play()
+			if fire_glove == true && right_power >= special_ability_power_threshold:
+				$Projectile_Spawner.spawn_projectile(get_global_mouse_position(), 1)
+			
+		if Input.is_action_just_pressed("left_click"):
+			is_charging = true
+			start_left_power_gain()
+			$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_windup_anim")
+			$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("charge_up_loop_anim")
+		if Input.is_action_just_released("left_click"):
+			is_charging = false
+			reset_left_power_with_buffor()
+			$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
+			atack_sound.play()
+			if shield_glove == true && left_power >= special_ability_power_threshold:
+				var new_shield = shield_scene.instantiate()
+				new_shield.global_position = (global_position + (get_global_mouse_position() - 
+				global_position).normalized() * shield_spawn_distance)
+				new_shield.global_rotation = global_rotation
+				get_parent().add_child(new_shield)
+			
+			
+		if Input.is_action_just_released("esc"):
+			if $Esc_Canvas.visible == true:
+				$Esc_Canvas.hide()
+			elif $Esc_Canvas.visible == false:
+				$Esc_Canvas.show()
+			
+		move_and_slide()
 
 		
 func start_right_power_gain():
@@ -198,27 +210,28 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		print("passed " , str(area))
 
 func take_damage(amount):
-	hp -= amount
-	health_bar.value -= damage
-	take_damage_sund.play()
-	if hp <= 0 && !playerDead:
-		game_over_sound.play()
-		game_over_voice.play()
-		$GameOverCanvas.show()
-		$GameOverCanvas/AnimationPlayer.play("game_over_srceen_anim")
-		playerDead = true
-	print("current hp " + str(hp))
-	set_modulate("red")
-	
-	#camera shake and red color below
-	var camera_shake = amount *  100
-	var tween = get_tree().create_tween()
-	for i in 3:
-		var random_offset = Vector2(randi_range(-camera_shake,camera_shake),randi_range(-camera_shake,camera_shake))
-		await tween.tween_property($Camera2D,"offset", random_offset, 0.05)
-	tween.tween_property($Camera2D,"offset", Vector2(0,0), 0.05)
-	
-	set_modulate(original_modulate)
+	if !playerDead:
+		hp -= amount
+		health_bar.value = hp
+		take_damage_sund.play()
+		if hp <= 0 && !playerDead:
+			game_over_sound.play()
+			game_over_voice.play()
+			$GameOverCanvas.show()
+			$GameOverCanvas/AnimationPlayer.play("game_over_srceen_anim")
+			playerDead = true
+		print("current hp " + str(hp))
+		set_modulate("red")
+		
+		#camera shake and red color below
+		var camera_shake = amount *  10
+		var tween = get_tree().create_tween()
+		for i in 3:
+			var random_offset = Vector2(randi_range(-camera_shake,camera_shake),randi_range(-camera_shake,camera_shake))
+			await tween.tween_property($Camera2D,"offset", random_offset, 0.05)
+		tween.tween_property($Camera2D,"offset", Vector2(0,0), 0.05)
+		
+		set_modulate(original_modulate)
 
 
 func _on_ok_button_down() -> void:

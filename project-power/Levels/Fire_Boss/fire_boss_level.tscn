@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=4 uid="uid://ylguwbx0pm0t"]
+[gd_scene load_steps=11 format=4 uid="uid://ylguwbx0pm0t"]
 
 [ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_2m5fo"]
 [ext_resource type="PackedScene" uid="uid://b7jovc0fgr5ph" path="res://Levels/Fire_Boss/fire_boss.tscn" id="2_imo2m"]
 [ext_resource type="PackedScene" uid="uid://curj7ix5ye7iv" path="res://Levels/Fire_Boss/fire_area.tscn" id="2_ty128"]
 [ext_resource type="Texture2D" uid="uid://c6fu73lagb568" path="res://Levels/Fire_Boss/tiles/ground_floor.png" id="2_vyldg"]
 [ext_resource type="Texture2D" uid="uid://c7m0qy1v226ku" path="res://Levels/Fire_Boss/tiles/brick platform.png" id="4_j8tas"]
+[ext_resource type="Script" path="res://Levels/Fire_Boss/fire_level_upgrades_data.gd" id="6_2kmku"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x404c"]
 texture = ExtResource("2_vyldg")
@@ -505,3 +506,6 @@ position = Vector2(96, 928)
 
 [node name="Fire_Boss" parent="." instance=ExtResource("2_imo2m")]
 position = Vector2(-16, -688)
+
+[node name="player_upgrades_data" type="Node2D" parent="."]
+script = ExtResource("6_2kmku")

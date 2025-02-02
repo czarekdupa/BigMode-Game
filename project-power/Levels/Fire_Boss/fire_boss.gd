@@ -10,7 +10,7 @@ var bullets : int
 @export var projectile_scene: PackedScene 
 @export_category("Timers")
 @export var fireball_timer_time := 3
-@export var boss_power_glove_texture: CompressedTexture2D
+
 @onready var take_damage_sound: AudioStreamPlayer2D = $take_damage_sound
 @onready var shooting_sound: AudioStreamPlayer2D = $Shooting_sound
 
@@ -108,7 +108,6 @@ func heal_health(health : float):
 	$Sprite2D.set_modulate("green")
 	await get_tree().create_timer(0.2).timeout
 	$Sprite2D.set_modulate(ORIGINAL_COLOR)
-	print_debug("the hp is %s " % hp)
 
 func take_damage(damage):
 	hp -= damage
@@ -118,7 +117,7 @@ func take_damage(damage):
 	if hp <= 0:
 		player.fire_glove = true;
 		Sprite2D
-		player.get_child(2).get_child(0).get_child(0).texture = boss_power_glove_texture
+		
 		player.get_child(11).show()
 		player.upgrade_sound.play()
 		player.get_child(11).get_child(2).play("PowerUp_enter_anim")
@@ -134,4 +133,3 @@ func _on_projectile_timer_timeout() -> void:
 
 func _on_heal_timer_timeout() -> void:
 	heal_health(1)
-	print_debug("timer timedout")

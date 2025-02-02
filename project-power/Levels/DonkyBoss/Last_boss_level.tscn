@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://ba7b1vp0uvw6i"]
+[gd_scene load_steps=15 format=4 uid="uid://ba7b1vp0uvw6i"]
 
 [ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_45wwj"]
 [ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_37il4"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c6fu73lagb568" path="res://Levels/Fire_Boss/tiles/ground_floor.png" id="7_ymr0c"]
 [ext_resource type="Texture2D" uid="uid://c7m0qy1v226ku" path="res://Levels/Fire_Boss/tiles/brick platform.png" id="8_qccf1"]
 [ext_resource type="AudioStream" uid="uid://haut5vio1mm7" path="res://Sounds/Impact2Bass.mp3" id="9_uswh8"]
+[ext_resource type="Script" path="res://Levels/DonkyBoss/last_boss_player_upgrades_data.gd" id="10_uqsue"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wtexh"]
 texture = ExtResource("7_ymr0c")
@@ -381,3 +382,6 @@ tile_set = SubResource("TileSet_tt1v7")
 
 [node name="take_damage_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_uswh8")
+
+[node name="player_upgrades_data" type="Node2D" parent="."]
+script = ExtResource("10_uqsue")

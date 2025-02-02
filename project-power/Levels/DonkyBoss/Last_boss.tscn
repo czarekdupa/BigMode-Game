@@ -15,7 +15,7 @@ radius = 7.88456
 [sub_resource type="CircleShape2D" id="CircleShape2D_10orj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4potd"]
-bg_color = Color(0.572549, 0, 0, 1)
+bg_color = Color(0.67451, 0.196078, 0.196078, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
@@ -26,14 +26,15 @@ shadow_color = Color(0.403922, 0.172549, 0.0627451, 0.529412)
 shadow_size = 10
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7irm"]
-bg_color = Color(7.58059e-06, 0.566948, 0.111356, 1)
+bg_color = Color(0.415686, 0.745098, 0.188235, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [node name="LastBoss" type="CharacterBody2D"]
-collision_layer = 4
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_nuvan")
 projectile_scene = ExtResource("2_2fk0o")

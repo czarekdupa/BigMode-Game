@@ -2,15 +2,15 @@ extends CharacterBody2D
 
 var hp = 100
 var phase_zero_hp = 1
-var phase_one_hp = 100
-var phase_two_hp = 100
+var phase_one_hp = 50
+var phase_two_hp = 30
 var current_phase = 0
 var phase_one_distance = 10
 var speed = 500
 var new_direction
 var player : CharacterBody2D
 var ORIGINAL_COLOR = modulate
-var damage = 1
+var damage = 3
 
 @export var projectile_scene: PackedScene 
 var enemy_scene = preload("res://Enemies/enemy.tscn")
@@ -52,10 +52,10 @@ func _process(delta: float) -> void:
 		current_phase = 3
 		health_bar.max_value = hp
 		health_bar.value = hp
-		get_parent().get_child(3).can_shoot = false;
-		get_parent().get_child(4).can_shoot = false;
-		get_parent().get_child(5).can_shoot = false;
-		get_parent().get_child(6).can_shoot = false;
+		get_parent().get_child(3).can_shoot = true;
+		get_parent().get_child(4).can_shoot = true;
+		get_parent().get_child(5).can_shoot = true;
+		get_parent().get_child(6).can_shoot = true;
 		change_direction_third_phase()
 		spawn_enemy()
 	
@@ -131,7 +131,6 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 		
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	print(area.get_groups())
 	if area.is_in_group("player_projectile"):
 		if area.owner:
 			take_damage(area.owner.damage)
