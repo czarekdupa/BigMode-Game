@@ -15,6 +15,7 @@ var original_modulate := get_modulate()
 @onready var game_over_sound: AudioStreamPlayer2D = $Game_over_sound
 @onready var upgrade_sound: AudioStreamPlayer2D = $Upgrade_sound
 @onready var music_sound: AudioStreamPlayer2D = $Music_sound
+@onready var win_sound: AudioStreamPlayer2D = $Win_sound
 
 @export var fire_glove_texture: CompressedTexture2D
 @export var shield_glove_texture: CompressedTexture2D

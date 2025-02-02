@@ -79,6 +79,7 @@ wait_time = 0.5
 [node name="boss_detector" type="Area2D" parent="."]
 modulate = Color(1, 0.0470588, 0.0470588, 0.588235)
 show_behind_parent = true
+scale = Vector2(0.813333, 0.813333)
 collision_layer = 0
 collision_mask = 4
 
