@@ -1,12 +1,16 @@
 extends CharacterBody2D
+var hp = 100
 
+func _ready():
+	$CanvasLayer/Health_Bar.value = hp
+	$CanvasLayer/Health_Bar.max_value = hp
 
 
 func _physics_process(delta: float) -> void:
-	pass
 
 	move_and_slide()
 
 
 func take_damage(damage):
-	print(damage)
+	hp -=damage
+	$CanvasLayer/Health_Bar.value = hp

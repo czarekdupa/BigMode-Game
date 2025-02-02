@@ -1,8 +1,9 @@
 extends AnimatableBody2D
 
 var damage = 1
-@export var hp = 20
-@export var move_speed : = 1000
+@export var hp:float = 20
+var original_hp:float = hp
+@export var move_time : = 1.5
 @export var first_marker = Marker2D
 @export var second_marker = Marker2D
 var in_movement : bool
@@ -16,6 +17,19 @@ signal minion_took_damage(damage)
 
 func _ready() -> void:
 	$PlayerDetector.player_detected.connect(_on_player_detected)
+	
+	
+func _process(delta: float) -> void:
+	
+	if hp > original_hp * 2/3:
+		$Sprite2D.frame = 0
+	elif (original_hp * 1/3) < hp and hp <= (original_hp * 2/3):
+		$Sprite2D.frame = 2
+	elif 0 < hp and hp <= (original_hp * 1/3):
+		$Sprite2D.frame = 1
+	else:
+		$Sprite2D.frame = 3
+	
 
 
 
@@ -23,7 +37,14 @@ func take_damage(damage):
 	take_damage_sound.play()
 	hp -= damage
 	emit_signal("minion_took_damage", damage)
-
+	if hp < 0:
+		$Sprite2D.frame = 3
+		if $PlayerDetector:
+			$PlayerDetector.queue_free()
+			$attackbox.queue_free()
+			$hitbox.queue_free()
+			$CollisionShape2D.queue_free()
+	
 func start_movement():
 	$AnimationPlayer.play("charge_up")
 	await get_tree().create_timer(1).timeout
@@ -34,12 +55,12 @@ func start_movement():
 func move_to_area():
 	var tween = get_tree().create_tween()
 	if going_forward:
-		tween.tween_property(self, "position", second_marker.global_position, 1)
-		tween.chain().tween_property(self, "rotation", new_rotation, 1)
+		tween.tween_property(self, "position", second_marker.global_position, move_time)
+		tween.chain().tween_property(self, "rotation", new_rotation, 1.5)
 		going_forward = false
 	elif not going_forward:
-		tween.tween_property(self, "position", first_marker.global_position, 1)
-		tween.chain().tween_property(self, "rotation", original_rotation, 1)
+		tween.tween_property(self, "position", first_marker.global_position, move_time)
+		tween.chain().tween_property(self, "rotation", original_rotation, 1.5)
 		going_forward = true
 	else:
 		print_debug("not moving")

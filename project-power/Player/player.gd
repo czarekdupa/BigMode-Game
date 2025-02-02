@@ -242,7 +242,13 @@ func _on_right_glove_body_entered(body: Node2D):
 	if body.is_in_group("walls"):
 		if $Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation == "right_glove_anim":
 			$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
+	elif body.is_in_group("moai_enemy"):
+		if $Right_Glove_Position/RightGlove/RG_AnimationPlayer.current_animation == "right_glove_anim":
+			$Right_Glove_Position/RightGlove/RG_AnimationPlayer.stop()
 func _on_left_glove_body_entered(body: Node2D):
 	if body.is_in_group("walls"):
+		if $Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation == "right_glove_anim":
+			$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
+	elif body.is_in_group("moai_enemy"):
 		if $Left_Glove_Position/LeftGlove/LG_AnimationPlayer.current_animation == "right_glove_anim":
 			$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.stop()
