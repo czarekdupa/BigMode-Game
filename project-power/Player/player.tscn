@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://7qao3jj0h4du"]
+[gd_scene load_steps=44 format=3 uid="uid://7qao3jj0h4du"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_6vd06"]
 [ext_resource type="Texture2D" uid="uid://k3sps8ntwd8b" path="res://Player/Player_Sprite.png" id="2_s3k6a"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://csseh5xehbeyh" path="res://Player/Gloves/fire_glove.png" id="12_gtcbj"]
 [ext_resource type="Texture2D" uid="uid://ci5yxerfj7843" path="res://Levels/MainMenu/Quit.png" id="13_nuvgu"]
 [ext_resource type="AudioStream" uid="uid://dajfdd123s4lc" path="res://Sounds/snare.mp3" id="17_15vbl"]
+[ext_resource type="AudioStream" uid="uid://dh78e44m3tykt" path="res://Sounds/Bell_singal.mp3" id="17_lfa4h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d6yi2"]
 radius = 23.0
@@ -806,9 +807,11 @@ scale = Vector2(0.694013, 0.680001)
 icon = ExtResource("13_nuvgu")
 
 [node name="Power_Meter_snere_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_15vbl")
+volume_db = -16.0
 
 [node name="Power_mete_bell_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("17_15vbl")
+stream = ExtResource("17_lfa4h")
 volume_db = -16.0
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

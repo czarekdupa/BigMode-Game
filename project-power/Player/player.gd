@@ -138,18 +138,27 @@ func start_left_power_gain():
 			current_threshold = 1
 			left_power_current_treshold = 1
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_meter_number_1_enter_anim")
+			power_meter_snere_sound.pitch_scale = 1
+			power_meter_snere_sound.play()
 		if left_power >= second_power_threshold && current_threshold == 1:
 			current_threshold = 2 
 			left_power_current_treshold = 2
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_meter_number_2_enter_anim")
+			power_meter_snere_sound.pitch_scale += 0.1
+			power_meter_snere_sound.play()
 		if left_power >= third_power_threshold && current_threshold == 2:
 			current_threshold = 3
 			left_power_current_treshold = 3
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_meter_number_3_enter_anim")
+			power_meter_snere_sound.pitch_scale += 0.1
+			power_meter_snere_sound.play()
 		if left_power >= forth_power_threshold && current_threshold == 3:
 			current_threshold = 4
 			left_power_current_treshold = 4
 			$CanvasLayer/Left_Meter/AnimationPlayer.play("power_Meter_number_4_enter_anim")
+			power_meter_snere_sound.pitch_scale += 0.2
+			power_meter_snere_sound.play()
+			power_mete_bell_sound.play()
 			
 		await get_tree().create_timer(power_gain_speed).timeout
 		
