@@ -555,7 +555,7 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 44
 motion_mode = 1
-platform_on_leave = 2
+platform_wall_layers = 36
 script = ExtResource("1_6vd06")
 projectile_scene = ExtResource("2_sc4jp")
 

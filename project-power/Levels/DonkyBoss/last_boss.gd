@@ -149,7 +149,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			take_damage(area.damage)
 	
 
-
 func take_damage(damage):
 	take_damage_sound.play()
 	if current_phase == 0:

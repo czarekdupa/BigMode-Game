@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://dauwsf0xnk3vk"]
+[gd_scene load_steps=11 format=4 uid="uid://dauwsf0xnk3vk"]
 
 [ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_5q7sw"]
 [ext_resource type="Texture2D" uid="uid://ons6ktvrln4j" path="res://Levels/Moai_Boss/tiles/Brick Walls.png" id="1_7ve0u"]
+[ext_resource type="Script" path="res://Levels/Moai_Boss/moai_boss_level.gd" id="1_r3ika"]
 [ext_resource type="PackedScene" uid="uid://tix0hp4m262" path="res://Levels/Moai_Boss/moai_boss.tscn" id="1_uvqr4"]
 [ext_resource type="Texture2D" uid="uid://cryq5lr1t6wtq" path="res://Levels/Moai_Boss/tiles/dark_bricks.png" id="2_gfrb7"]
 [ext_resource type="PackedScene" uid="uid://die74adxassdo" path="res://Levels/Moai_Boss/moai_minion.tscn" id="5_unwrb"]
@@ -206,13 +207,14 @@ texture_region_size = Vector2i(64, 64)
 [sub_resource type="TileSet" id="TileSet_miw7j"]
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 32
-physics_layer_0/collision_mask = 11
+physics_layer_0/collision_mask = 15
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "WAlls"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.345098, 0.898039, 1)
 sources/1 = SubResource("TileSetAtlasSource_2jnyq")
 
 [node name="moai_boss_level" type="Node2D"]
+script = ExtResource("1_r3ika")
 
 [node name="tiles" type="Node2D" parent="."]
 
@@ -232,5 +234,13 @@ position = Vector2(599, 348)
 
 [node name="moai_minions" type="Node" parent="."]
 
-[node name="moai_minion" parent="moai_minions" instance=ExtResource("5_unwrb")]
+[node name="moai_minion" parent="moai_minions" node_paths=PackedStringArray("first_marker", "second_marker") instance=ExtResource("5_unwrb")]
 position = Vector2(1280, 0)
+first_marker = NodePath("../first_marker")
+second_marker = NodePath("../second_marker")
+
+[node name="first_marker" type="Marker2D" parent="moai_minions"]
+position = Vector2(1280, 0)
+
+[node name="second_marker" type="Marker2D" parent="moai_minions"]
+position = Vector2(-128, 0)

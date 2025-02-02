@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://die74adxassdo"]
+[gd_scene load_steps=11 format=3 uid="uid://die74adxassdo"]
 
 [ext_resource type="Script" path="res://Levels/Moai_Boss/moai_minion.gd" id="1_2qk7g"]
 [ext_resource type="Texture2D" uid="uid://bu5vqsakbb5bx" path="res://Levels/Moai_Boss/moai_minion_sprite.png" id="1_swsb3"]
 [ext_resource type="Script" path="res://Levels/Moai_Boss/ray_cast_2d.gd" id="3_vea01"]
+[ext_resource type="AudioStream" uid="uid://c4ekon4pp3xbs" path="res://Sounds/hit-rock-02-266304.mp3" id="4_uvxwl"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ugsfy"]
 radius = 24.0
@@ -11,6 +12,21 @@ height = 48.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_88wkp"]
 radius = 7.0
 height = 28.0
+
+[sub_resource type="Animation" id="Animation_su7s4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_1vihs"]
 resource_name = "charge_up"
@@ -29,32 +45,18 @@ tracks/0/keys = {
 "values": [0.174533, -0.174533]
 }
 
-[sub_resource type="Animation" id="Animation_su7s4"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t2wrx"]
 _data = {
 "RESET": SubResource("Animation_su7s4"),
 "charge_up": SubResource("Animation_1vihs")
 }
 
-[node name="moai_minion" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5f7h"]
+size = Vector2(20, 48)
+
+[node name="moai_minion" type="AnimatableBody2D"]
 scale = Vector2(2, 2)
-collision_layer = 4
-motion_mode = 1
-platform_on_leave = 2
+collision_layer = 0
 script = ExtResource("1_2qk7g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -68,11 +70,13 @@ region_rect = Rect2(0, 0, 128, 128)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_ugsfy")
 
-[node name="RayCast2D" type="RayCast2D" parent="."]
+[node name="PlayerDetector" type="RayCast2D" parent="."]
 target_position = Vector2(-776, 0)
 script = ExtResource("3_vea01")
 
 [node name="hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 position = Vector2(22.5, 1.5)
@@ -82,3 +86,16 @@ shape = SubResource("CapsuleShape2D_88wkp")
 libraries = {
 "": SubResource("AnimationLibrary_t2wrx")
 }
+
+[node name="take_damage_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_uvxwl")
+
+[node name="attackbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackbox"]
+position = Vector2(-24, 0)
+shape = SubResource("RectangleShape2D_x5f7h")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
