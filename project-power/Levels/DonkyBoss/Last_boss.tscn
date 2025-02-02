@@ -1,18 +1,91 @@
-[gd_scene load_steps=4 format=3 uid="uid://dikeoabpjq6by"]
+[gd_scene load_steps=9 format=3 uid="uid://dikeoabpjq6by"]
 
 [ext_resource type="Script" path="res://Levels/DonkyBoss/last_boss.gd" id="1_nuvan"]
-[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_o4xhm"]
+[ext_resource type="Texture2D" uid="uid://dknbkpwtbdkpq" path="res://Levels/DonkyBoss/donkey_idle spirtes.png" id="2_iq58e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ddnps"]
+radius = 7.88456
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l5clj"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_sjsbu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_10orj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4potd"]
+bg_color = Color(0.572549, 0, 0, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 1.0
+expand_margin_right = 1.0
+shadow_color = Color(0.403922, 0.172549, 0.0627451, 0.529412)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7irm"]
+bg_color = Color(7.58059e-06, 0.566948, 0.111356, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
 [node name="LastBoss" type="CharacterBody2D"]
+collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_nuvan")
 
+[node name="AttackHitbox" type="Area2D" parent="."]
+scale = Vector2(1.2, 1.28)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+scale = Vector2(7.32, 12.44)
+shape = SubResource("CircleShape2D_ddnps")
+
 [node name="BossSprite" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
-texture = ExtResource("2_o4xhm")
+texture = ExtResource("2_iq58e")
+hframes = 4
+region_enabled = true
+region_rect = Rect2(0, 0, 256, 160)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(12.16, 11.72)
+scale = Vector2(5.28, 11.72)
 shape = SubResource("CircleShape2D_l5clj")
+
+[node name="HitboxArea" type="Area2D" parent="."]
+scale = Vector2(0.48, 1)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+scale = Vector2(11.88, 11.44)
+shape = SubResource("CircleShape2D_sjsbu")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+scale = Vector2(349.597, 267.539)
+shape = SubResource("CircleShape2D_10orj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Health_Bar" type="ProgressBar" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -304.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 48.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_4potd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_b7irm")
+value = 100.0
+show_percentage = false
+
+[connection signal="area_entered" from="HitboxArea" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
