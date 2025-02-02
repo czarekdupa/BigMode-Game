@@ -141,8 +141,35 @@ corner_radius_bottom_left = 8
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iytym"]
 bg_color = Color(1, 1, 0, 1)
 
-[sub_resource type="Animation" id="Animation_p101j"]
-resource_name = "power_meter_number_1_enter_anim"
+[sub_resource type="Animation" id="Animation_3vgjn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_da0tw"]
+resource_name = "power_Meter_number_4_enter_anim"
 length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -166,11 +193,12 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [3]
 }
 
-[sub_resource type="Animation" id="Animation_3vgjn"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_p101j"]
+resource_name = "power_meter_number_1_enter_anim"
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -178,10 +206,10 @@ tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(0.164939, 1, 1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [Vector2(0, 0), Vector2(2, 2), Vector2(1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -250,34 +278,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
-}
-
-[sub_resource type="Animation" id="Animation_da0tw"]
-resource_name = "power_Meter_number_4_enter_anim"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(0.164939, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(2, 2), Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kkcvk"]
@@ -668,12 +668,38 @@ libraries = {
 "": SubResource("AnimationLibrary_kkcvk")
 }
 
-[node name="r_progressBar2" type="ProgressBar" parent="CanvasLayer"]
-offset_left = 722.0
-offset_top = 559.0
-offset_right = 1131.0
-offset_bottom = 586.0
+[node name="Right_Meter" type="Node2D" parent="CanvasLayer"]
+position = Vector2(722, 559)
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer/Right_Meter"]
+position = Vector2(173, 4.99997)
+scale = Vector2(0.84, 0.84)
+texture = ExtResource("6_hybua")
+
+[node name="r_progressBar2" type="ProgressBar" parent="CanvasLayer/Right_Meter"]
+offset_left = 87.0
+offset_top = -3.0
+offset_right = 496.0
+offset_bottom = 24.0
+scale = Vector2(0.583295, 0.759998)
 theme_override_styles/fill = SubResource("StyleBoxFlat_lnb1h")
+show_percentage = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Right_Meter"]
+position = Vector2(197, 6)
+scale = Vector2(0.77, 0.84)
+texture = ExtResource("7_5oywg")
+
+[node name="Numbers" type="Sprite2D" parent="CanvasLayer/Right_Meter"]
+position = Vector2(299, -2)
+texture = ExtResource("8_60chk")
+hframes = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Right_Meter"]
+root_node = NodePath("../Numbers")
+libraries = {
+"": SubResource("AnimationLibrary_kkcvk")
+}
 
 [node name="GameOverCanvas" type="CanvasLayer" parent="."]
 visible = false

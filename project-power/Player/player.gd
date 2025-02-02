@@ -37,7 +37,7 @@ var playerDead = false;
 
 func _ready() -> void:
 	$CanvasLayer/Left_Meter/l_progressBar.max_value = max_power
-	$CanvasLayer/r_progressBar2.max_value = max_power
+	$CanvasLayer/Right_Meter/r_progressBar2.max_value = max_power
 	health_bar.max_value = hp
 	health_bar.value = hp
 
@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	
 	look_at(get_global_mouse_position())
 	
-	$CanvasLayer/r_progressBar2.value = right_power
+	$CanvasLayer/Right_Meter/r_progressBar2.value = right_power
 	$CanvasLayer/Left_Meter/l_progressBar.value = left_power
 	
 	if Input.is_action_just_pressed("right_click"):
@@ -95,8 +95,21 @@ func _physics_process(delta: float) -> void:
 
 		
 func start_right_power_gain():
+	var current_threshold = 0
 	while is_charging && right_power < max_power:
 		right_power += power_gain_amount
+		if right_power >= first_power_threshold && current_threshold == 0:
+			current_threshold = 1
+			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_meter_number_1_enter_anim")
+		if right_power >= second_power_threshold && current_threshold == 1:
+			current_threshold = 2 
+			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_meter_number_2_enter_anim")
+		if right_power >= third_power_threshold && current_threshold == 2:
+			current_threshold = 3
+			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_meter_number_3_enter_anim")
+		if right_power >= forth_power_threshold && current_threshold == 3:
+			current_threshold = 4
+			$CanvasLayer/Right_Meter/AnimationPlayer.play("power_Meter_number_4_enter_anim")
 		await get_tree().create_timer(power_gain_speed).timeout
 		
 func start_left_power_gain():
