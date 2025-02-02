@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://tix0hp4m262"]
+[gd_scene load_steps=7 format=3 uid="uid://tix0hp4m262"]
 
+[ext_resource type="Script" path="res://Levels/Moai_Boss/moai_boss.gd" id="1_kwo71"]
 [ext_resource type="Texture2D" uid="uid://cw5ebs4f0adxl" path="res://Levels/Moai_Boss/moai_boss.png" id="1_toyco"]
 [ext_resource type="Texture2D" uid="uid://c5kwl3rywim5m" path="res://Levels/Moai_Boss/shield_glove.png" id="2_yua60"]
 
@@ -16,6 +17,9 @@ size = Vector2(120, 48)
 
 [node name="moai_boss" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+motion_mode = 1
+platform_on_leave = 2
+script = ExtResource("1_kwo71")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_toyco")
