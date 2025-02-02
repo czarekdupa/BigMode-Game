@@ -15,6 +15,7 @@ height = 66.0
 size = Vector2(120, 48)
 
 [node name="moai_boss" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_toyco")

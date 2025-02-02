@@ -15,6 +15,10 @@ run/main_scene="res://Levels/MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Mobile")
 config/icon="res://icon.svg"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
@@ -73,6 +77,7 @@ esc={
 2d_physics/layer_3="enemy"
 2d_physics/layer_4="enemy_projectile"
 2d_physics/layer_5="fire_area"
+2d_physics/layer_6="Walls"
 
 [rendering]
 
