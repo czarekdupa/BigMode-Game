@@ -31,5 +31,10 @@ func _on_next_level_button_down() -> void:
 	get_tree().change_scene_to_file("res://Levels/Moai_Boss/moai_boss_level.tscn")
 
 
-func _on_next_level_2_button_down() -> void:
+
+func _on_next_boss_2_button_down() -> void:
 	get_tree().change_scene_to_file("res://Levels/DonkyBoss/Last_boss_level.tscn")
+
+
+func _on_main_menu_from_win_button_down() -> void:
+	get_tree().change_scene_to_file("res://Levels/MainMenu/MainMenu.tscn")

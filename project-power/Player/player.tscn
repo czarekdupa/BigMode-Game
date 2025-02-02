@@ -501,7 +501,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Glove:scale")
+tracks/1/path = NodePath("thanks:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -540,7 +540,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Glove:scale")
+tracks/2/path = NodePath("thanks:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -789,6 +789,7 @@ grow_vertical = 2
 icon = ExtResource("9_rmx3t")
 
 [node name="Power_up_canvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PowerUp" type="Sprite2D" parent="Power_up_canvas"]
 position = Vector2(589, 124)
@@ -870,29 +871,22 @@ visible = false
 position = Vector2(589, 98)
 texture = ExtResource("26_4nhaq")
 
-[node name="Glove" type="Sprite2D" parent="WinCanvas"]
+[node name="thanks" type="Sprite2D" parent="WinCanvas"]
 position = Vector2(579, 289)
-scale = Vector2(3, 3)
 texture = ExtResource("27_g7kr5")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WinCanvas"]
-libraries = {
-"": SubResource("AnimationLibrary_qcn0o")
-}
-
-[node name="Next_level" type="Button" parent="WinCanvas"]
+[node name="MainMenu_from_win" type="Button" parent="WinCanvas"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -134.0
-offset_top = 96.0
-offset_right = 269.0
-offset_bottom = 186.0
+offset_left = -140.0
+offset_top = 99.0
+offset_right = 141.0
+offset_bottom = 184.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.694013, 0.680001)
 icon = ExtResource("9_rmx3t")
 
 [node name="Win_sound" type="AudioStreamPlayer2D" parent="."]
@@ -932,19 +926,18 @@ grow_vertical = 2
 text = "Let's you put down a blue shield that protects you from bullets
 "
 
-[node name="Next_level_2" type="Button" parent="Power_up_canvas2"]
-anchors_preset = 8
+[node name="Next_boss_2" type="Button" parent="Power_up_canvas2"]
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -134.0
-offset_top = 96.0
-offset_right = 269.0
-offset_bottom = 186.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = -182.0
+offset_right = 4.0
+offset_bottom = -174.0
 grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.694013, 0.680001)
+grow_vertical = 0
 icon = ExtResource("17_ijxhb")
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
@@ -956,8 +949,5 @@ icon = ExtResource("17_ijxhb")
 [connection signal="button_down" from="Esc_Canvas/Menu" to="SceneManager" method="_on_menu_button_down"]
 [connection signal="button_down" from="Power_up_canvas/Next_level" to="." method="_on_ok_button_down"]
 [connection signal="button_down" from="Power_up_canvas/Next_level" to="SceneManager" method="_on_next_level_button_down"]
-[connection signal="button_down" from="WinCanvas/Next_level" to="." method="_on_ok_button_down"]
-[connection signal="button_down" from="WinCanvas/Next_level" to="SceneManager" method="_on_next_level_button_down"]
-[connection signal="button_down" from="Power_up_canvas2/Next_level_2" to="." method="_on_ok_button_down"]
-[connection signal="button_down" from="Power_up_canvas2/Next_level_2" to="SceneManager" method="_on_next_level_button_down"]
-[connection signal="button_down" from="Power_up_canvas2/Next_level_2" to="SceneManager" method="_on_next_level_2_button_down"]
+[connection signal="button_down" from="WinCanvas/MainMenu_from_win" to="SceneManager" method="_on_main_menu_from_win_button_down"]
+[connection signal="button_down" from="Power_up_canvas2/Next_boss_2" to="SceneManager" method="_on_next_boss_2_button_down"]
