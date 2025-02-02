@@ -144,6 +144,7 @@ corner_radius_bottom_left = 8
 [sub_resource type="SystemFont" id="SystemFont_iitwp"]
 font_names = PackedStringArray("THE JACATRA")
 font_weight = 500
+subpixel_positioning = 0
 
 [sub_resource type="Animation" id="Animation_hhw4y"]
 length = 0.001

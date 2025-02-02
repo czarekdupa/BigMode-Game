@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var hp := 10
 var original_modulate := get_modulate()
 @export var damage := 1
-@export var knockback_power = 1000
+@export var knockback_power = 300
 @export var right_power = 0
 @export var left_power = 0
 @export var max_power = 10
@@ -15,11 +15,14 @@ var original_modulate := get_modulate()
 @export var power_buffor_time = 0.2
 @export var special_ability_power_threshold = 3
 var is_charging = false
-var fire_glove = false
+var fire_glove = true
+var shield_glove = true
 @export_group("Projectiles")
 @export var projectile_scene = PackedScene
+var shield_scene = preload("res://Player/Shield.tscn")
 
 @onready var health_bar = $CanvasLayer/Health_Bar
+var shield_spawn_distance = 250
 
 var playerDead = false;
 
@@ -65,6 +68,12 @@ func _physics_process(delta: float) -> void:
 		is_charging = false
 		reset_left_power_with_buffor()
 		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
+		if shield_glove == true && left_power >= special_ability_power_threshold:
+			var new_shield = shield_scene.instantiate()
+			new_shield.global_position = (global_position + (get_global_mouse_position() - 
+			global_position).normalized() * shield_spawn_distance)
+			new_shield.global_rotation = global_rotation
+			get_parent().add_child(new_shield)
 		
 		
 	if Input.is_action_just_released("esc"):

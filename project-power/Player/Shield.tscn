@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cg1xrerdnsyb"]
+
+[ext_resource type="Script" path="res://Player/Shield.gd" id="1_lan17"]
+[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="1_v0viv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhc7b"]
+
+[node name="Shield" type="Area2D"]
+position = Vector2(229, 271)
+scale = Vector2(2.8, 8.84)
+collision_mask = 0
+script = ExtResource("1_lan17")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qhc7b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.734117, 0.734117, 0.317647)
+scale = Vector2(0.157143, 0.158371)
+texture = ExtResource("1_v0viv")

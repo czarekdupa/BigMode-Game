@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba7b1vp0uvw6i"]
+
+[ext_resource type="PackedScene" uid="uid://7qao3jj0h4du" path="res://Player/player.tscn" id="1_45wwj"]
+[ext_resource type="Texture2D" uid="uid://djq5p1jbe5tit" path="res://icon.svg" id="2_37il4"]
+[ext_resource type="Script" path="res://Levels/DonkyBoss/statue.gd" id="3_0cmqn"]
+[ext_resource type="PackedScene" uid="uid://bciusmv38b438" path="res://Enemies/fire_projectile.tscn" id="4_jr11d"]
+[ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="4_rnijq"]
+[ext_resource type="PackedScene" uid="uid://dikeoabpjq6by" path="res://Levels/DonkyBoss/Last_boss.tscn" id="7_wk243"]
+
+[node name="LastBossLevel" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_45wwj")]
+position = Vector2(606, 515)
+
+[node name="statue4" type="Sprite2D" parent="."]
+position = Vector2(996, -102)
+rotation = 1.5708
+texture = ExtResource("2_37il4")
+script = ExtResource("3_0cmqn")
+projectile_scene = ExtResource("4_jr11d")
+shooting_velctor = Vector2(0, 1)
+
+[node name="Projectile_Spawner" parent="statue4" instance=ExtResource("4_rnijq")]
+
+[node name="statue3" type="Sprite2D" parent="."]
+position = Vector2(345, -95)
+rotation = 1.5708
+texture = ExtResource("2_37il4")
+script = ExtResource("3_0cmqn")
+projectile_scene = ExtResource("4_jr11d")
+shooting_velctor = Vector2(0, 1)
+
+[node name="Projectile_Spawner" parent="statue3" instance=ExtResource("4_rnijq")]
+
+[node name="statue2" type="Sprite2D" parent="."]
+position = Vector2(-34, 742)
+texture = ExtResource("2_37il4")
+script = ExtResource("3_0cmqn")
+projectile_scene = ExtResource("4_jr11d")
+shooting_velctor = Vector2(1, 0)
+
+[node name="Projectile_Spawner" parent="statue2" instance=ExtResource("4_rnijq")]
+
+[node name="statue" type="Sprite2D" parent="."]
+position = Vector2(-33, 272)
+texture = ExtResource("2_37il4")
+script = ExtResource("3_0cmqn")
+projectile_scene = ExtResource("4_jr11d")
+shooting_velctor = Vector2(1, 0)
+
+[node name="Projectile_Spawner" parent="statue" instance=ExtResource("4_rnijq")]
+
+[node name="LastBoss" parent="." instance=ExtResource("7_wk243")]
+position = Vector2(601, 76)
