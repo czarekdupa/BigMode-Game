@@ -11,6 +11,8 @@ var bullets : int
 @export_category("Timers")
 @export var fireball_timer_time := 3
 @export var boss_power_glove_texture: CompressedTexture2D
+@onready var take_damage_sound: AudioStreamPlayer2D = $take_damage_sound
+@onready var shooting_sound: AudioStreamPlayer2D = $Shooting_sound
 
 var ORIGINAL_COLOR = modulate
 
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 				rotate_around_player(circle_direction)
 			
 		if can_shoot:
+			shooting_sound.play()
 			$Projectile_Spawner.spawn_projectile(player.global_position, bullets)
 			can_shoot = false
 			$ProjectileTimer.start()
@@ -84,14 +87,15 @@ func _on_detection_area_body_exited(body: Node2D) -> void:
 
 #DETECTS IF HIT BY PLAYER
 func _on_hitbox_area_entered(area: Area2D) -> void:
+	take_damage_sound.play()
 	if area.is_in_group("r_glove"):
 		if area.owner:
-			take_damage(area.owner.damage * area.owner.right_power)
+			take_damage(area.owner.damage * area.owner.right_power_current_treshold)
 		else:
 			take_damage(area.damage)
 	if area.is_in_group("l_glove"):
 		if area.owner:
-			take_damage(area.owner.damage * area.owner.left_power)
+			take_damage(area.owner.damage * area.owner.left_power_current_treshold)
 		else:
 			take_damage(area.damage)
 
@@ -116,6 +120,7 @@ func take_damage(damage):
 		Sprite2D
 		player.get_child(2).get_child(0).get_child(0).texture = boss_power_glove_texture
 		player.get_child(11).show()
+		player.upgrade_sound.play()
 		player.get_child(11).get_child(2).play("PowerUp_enter_anim")
 		await get_tree().create_timer(player.get_child(11).get_child(2).current_animation_length).timeout
 		player.get_child(11).get_child(2).play("PowerUp_anim")

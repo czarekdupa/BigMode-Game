@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b7jovc0fgr5ph"]
+[gd_scene load_steps=18 format=3 uid="uid://b7jovc0fgr5ph"]
 
 [ext_resource type="Script" path="res://Levels/Fire_Boss/fire_boss.gd" id="1_6kar8"]
 [ext_resource type="PackedScene" uid="uid://bciusmv38b438" path="res://Enemies/fire_projectile.tscn" id="2_cvyfi"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_sy0kh"]
 [ext_resource type="Texture2D" uid="uid://5b2ndvtcsg4o" path="res://Levels/Fire_Boss/Fire_Boss_Sprite.png" id="3_wc7vr"]
 [ext_resource type="Texture2D" uid="uid://phqctllbq5ql" path="res://Levels/MainMenu/PowerUp.png" id="6_7v51i"]
+[ext_resource type="AudioStream" uid="uid://haut5vio1mm7" path="res://Sounds/Impact2Bass.mp3" id="7_c7nwl"]
+[ext_resource type="AudioStream" uid="uid://8xi63i0bkebm" path="res://Sounds/FireBall_Shoot_Sound.wav" id="8_uhvwj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_w3unp"]
 radius = 52.1967
@@ -196,6 +198,13 @@ texture = ExtResource("3_lyn8c")
 libraries = {
 "": SubResource("AnimationLibrary_qcn0o")
 }
+
+[node name="take_damage_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_c7nwl")
+
+[node name="Shooting_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_uhvwj")
+volume_db = -30.0
 
 [connection signal="body_entered" from="Detection Area" to="." method="_on_detection_area_body_entered"]
 [connection signal="body_exited" from="Detection Area" to="." method="_on_detection_area_body_exited"]

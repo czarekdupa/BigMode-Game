@@ -19,6 +19,7 @@ var moving = true
 var new_position = Vector2(0,0)
 
 @onready var health_bar = $CanvasLayer/Health_Bar
+@onready var take_damage_sound: AudioStreamPlayer2D = $"../take_damage_sound"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -132,7 +133,6 @@ func _on_detection_area_body_entered(body: Node2D) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(area.get_groups())
 	if area.is_in_group("player_projectile"):
-		print("hit")
 		if area.owner:
 			take_damage(area.owner.damage)
 		else:
@@ -151,6 +151,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 
 func take_damage(damage):
+	take_damage_sound.play()
 	if current_phase == 0:
 		phase_zero_hp -= damage
 		health_bar.value = phase_zero_hp

@@ -3,12 +3,17 @@ extends CharacterBody2D
 
 @export_group("Player Stats") 
 @export var speed := 400.0
-@export var hp : float = 1
+@export var hp : float = 10
 var original_modulate := get_modulate()
 @export var damage := 1
 @export var knockback_power = 300
 @onready var power_meter_snere_sound: AudioStreamPlayer2D = $Power_Meter_snere_sound
 @onready var power_mete_bell_sound: AudioStreamPlayer2D = $Power_mete_bell_sound
+@onready var atack_sound: AudioStreamPlayer2D = $Atack_Sound
+@onready var take_damage_sund: AudioStreamPlayer2D = $Take_damage_sund
+@onready var game_over_voice: AudioStreamPlayer2D = $Game_over_voice
+@onready var game_over_sound: AudioStreamPlayer2D = $Game_over_sound
+@onready var upgrade_sound: AudioStreamPlayer2D = $Upgrade_sound
 
 
 @export var right_power = 0
@@ -70,6 +75,7 @@ func _physics_process(delta: float) -> void:
 		is_charging = false
 		reset_right_power_with_buffor()
 		$Right_Glove_Position/RightGlove/RG_AnimationPlayer.play("right_glove_anim")
+		atack_sound.play()
 		if fire_glove == true && right_power >= special_ability_power_threshold:
 			$Projectile_Spawner.spawn_projectile(get_global_mouse_position(), 1)
 		
@@ -82,6 +88,7 @@ func _physics_process(delta: float) -> void:
 		is_charging = false
 		reset_left_power_with_buffor()
 		$Left_Glove_Position/LeftGlove/LG_AnimationPlayer.play("right_glove_anim")
+		atack_sound.play()
 		if shield_glove == true && left_power >= special_ability_power_threshold:
 			var new_shield = shield_scene.instantiate()
 			new_shield.global_position = (global_position + (get_global_mouse_position() - 
@@ -180,7 +187,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("fire_area"):
 		take_damage(area.damage_per_second)
-	if area.is_in_group("laser"):
+	elif area.is_in_group("laser"):
 		take_damage(area.damage)
 	elif area.owner:
 		if area.owner.damage:
@@ -193,7 +200,10 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 func take_damage(amount):
 	hp -= amount
 	health_bar.value -= damage
+	take_damage_sund.play()
 	if hp <= 0 && !playerDead:
+		game_over_sound.play()
+		game_over_voice.play()
 		$GameOverCanvas.show()
 		$GameOverCanvas/AnimationPlayer.play("game_over_srceen_anim")
 		playerDead = true
