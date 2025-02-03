@@ -65,6 +65,8 @@ func _ready() -> void:
 		get_child(3).get_child(0).get_child(0).texture = shield_glove_texture
 
 func _physics_process(delta: float) -> void:
+	if !music_sound.playing:
+		music_sound.play()
 	if !playerDead:
 		var horizontal_movemoent := Input.get_axis("left", "right")
 		var vertical_movement := Input.get_axis("up","down")
