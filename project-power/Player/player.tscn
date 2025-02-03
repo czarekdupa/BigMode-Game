@@ -722,7 +722,7 @@ visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="GameOverCanvas"]
 self_modulate = Color(0, 0, 0, 0.427451)
-position = Vector2(587, 348)
+position = Vector2(640, 320)
 scale = Vector2(9.72, 5.68)
 texture = ExtResource("6_6l3tk")
 
@@ -792,11 +792,11 @@ icon = ExtResource("9_rmx3t")
 visible = false
 
 [node name="PowerUp" type="Sprite2D" parent="Power_up_canvas"]
-position = Vector2(589, 124)
+position = Vector2(640, 112)
 texture = ExtResource("11_e3hor")
 
 [node name="Glove" type="Sprite2D" parent="Power_up_canvas"]
-position = Vector2(579, 236)
+position = Vector2(640, 240)
 scale = Vector2(3, 3)
 texture = ExtResource("12_gtcbj")
 
@@ -820,19 +820,22 @@ grow_vertical = 2
 text = "Let's you shoot a fire projectile when power meter is half full"
 
 [node name="Next_level" type="Button" parent="Power_up_canvas"]
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -134.0
-offset_top = 96.0
-offset_right = 269.0
-offset_bottom = 186.0
+anchor_bottom = 1.0
+offset_left = -144.0
+offset_top = -288.0
+offset_right = 271.0
+offset_bottom = -147.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 scale = Vector2(0.694013, 0.680001)
+size_flags_vertical = 4
 icon = ExtResource("17_ijxhb")
+icon_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Upgrade_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_3a5x7")
@@ -862,17 +865,17 @@ volume_db = -20.0
 
 [node name="Music_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("25_khc7v")
-volume_db = -20.0
+volume_db = -4.0
 
 [node name="WinCanvas" type="CanvasLayer" parent="."]
 visible = false
 
 [node name="PowerUp" type="Sprite2D" parent="WinCanvas"]
-position = Vector2(589, 98)
+position = Vector2(640, 96)
 texture = ExtResource("26_4nhaq")
 
 [node name="thanks" type="Sprite2D" parent="WinCanvas"]
-position = Vector2(579, 289)
+position = Vector2(640, 288)
 texture = ExtResource("27_g7kr5")
 
 [node name="MainMenu_from_win" type="Button" parent="WinCanvas"]
@@ -898,11 +901,11 @@ stream = ExtResource("28_u5ul4")
 visible = false
 
 [node name="PowerUp" type="Sprite2D" parent="Power_up_canvas2"]
-position = Vector2(589, 124)
+position = Vector2(640, 112)
 texture = ExtResource("11_e3hor")
 
 [node name="Glove" type="Sprite2D" parent="Power_up_canvas2"]
-position = Vector2(579, 236)
+position = Vector2(640, 240)
 scale = Vector2(3, 3)
 texture = ExtResource("3_p44a0")
 
@@ -910,6 +913,7 @@ texture = ExtResource("3_p44a0")
 libraries = {
 "": SubResource("AnimationLibrary_qcn0o")
 }
+autoplay = "PowerUp_anim"
 
 [node name="Label" type="Label" parent="Power_up_canvas2"]
 anchors_preset = 8
@@ -932,10 +936,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -4.0
-offset_top = -182.0
-offset_right = 4.0
-offset_bottom = -174.0
+offset_left = -144.0
+offset_top = -256.0
+offset_right = 140.0
+offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 0
 icon = ExtResource("17_ijxhb")

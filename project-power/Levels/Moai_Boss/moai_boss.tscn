@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://tix0hp4m262"]
+[gd_scene load_steps=10 format=3 uid="uid://tix0hp4m262"]
 
 [ext_resource type="Script" path="res://Levels/Moai_Boss/moai_boss.gd" id="1_kwo71"]
 [ext_resource type="Texture2D" uid="uid://cw5ebs4f0adxl" path="res://Levels/Moai_Boss/moai_boss.png" id="1_toyco"]
@@ -9,8 +9,10 @@ radius = 30.0
 height = 82.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y2711"]
-radius = 14.0
+radius = 16.0
 height = 66.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uqa3v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3shge"]
 size = Vector2(120, 48)
@@ -35,6 +37,7 @@ corner_radius_bottom_left = 8
 
 [node name="moai_boss" type="AnimatableBody2D"]
 scale = Vector2(2, 2)
+collision_layer = 4
 script = ExtResource("1_kwo71")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -42,29 +45,43 @@ texture = ExtResource("1_toyco")
 region_rect = Rect2(0, 0, 96, 96)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_5041x")
 
 [node name="hibox" type="Area2D" parent="."]
+position = Vector2(0, -24)
+collision_layer = 4
+collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hibox"]
-position = Vector2(0, -22)
+visible = false
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_y2711")
 debug_color = Color(0.890334, 0.276988, 0.445252, 0.42)
 
-[node name="shield" type="Area2D" parent="."]
+[node name="shield" type="StaticBody2D" parent="." groups=["moai_minion"]]
+collision_layer = 4
 
 [node name="left glove" type="Sprite2D" parent="shield"]
 position = Vector2(-32, 32)
-scale = Vector2(-1, 1)
+rotation = -3.14159
+scale = Vector2(1, -1)
 texture = ExtResource("2_yua60")
 
 [node name="right glove" type="Sprite2D" parent="shield"]
 position = Vector2(32, 32)
 texture = ExtResource("2_yua60")
 
+[node name="Shield" type="Sprite2D" parent="shield"]
+modulate = Color(0, 0.879942, 0.880995, 0.4)
+position = Vector2(-0.353552, 23.8554)
+rotation = -3.14159
+scale = Vector2(120.183, -48.0443)
+texture = SubResource("PlaceholderTexture2D_uqa3v")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shield"]
+visible = false
 position = Vector2(0, 24)
 shape = SubResource("RectangleShape2D_3shge")
 
@@ -84,3 +101,35 @@ theme_override_styles/background = SubResource("StyleBoxFlat_e3537")
 theme_override_styles/fill = SubResource("StyleBoxFlat_0ecyp")
 value = 100.0
 show_percentage = false
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+show_behind_parent = true
+position = Vector2(0, -40)
+emitting = false
+amount = 128
+lifetime = 5.0
+one_shot = true
+speed_scale = 4.0
+explosiveness = 0.76
+randomness = 0.1
+lifetime_randomness = 0.51
+emission_shape = 5
+emission_points = PackedVector2Array(0, -1, -20, 10, 20, 10)
+emission_normals = PackedVector2Array(0, -1, 0, -1, 0, -1)
+emission_colors = PackedColorArray()
+direction = Vector2(0, 0)
+spread = 100.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+angular_velocity_max = 10.0
+linear_accel_max = 10.0
+radial_accel_min = -5.0
+damping_min = 20.0
+damping_max = 20.0
+angle_max = 90.0
+scale_amount_min = 1.5
+scale_amount_max = 2.5
+color = Color(0.356863, 0.431373, 0.882353, 1)
+
+[connection signal="area_entered" from="hibox" to="." method="_on_hibox_area_entered"]

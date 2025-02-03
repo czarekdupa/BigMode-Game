@@ -35,6 +35,7 @@ func _process(delta: float) -> void:
 
 func take_damage(damage):
 	take_damage_sound.play()
+	$CPUParticles2D.emitting = true
 	hp -= damage
 	emit_signal("minion_took_damage", damage)
 	if hp < 0:

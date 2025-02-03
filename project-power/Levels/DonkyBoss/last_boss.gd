@@ -26,6 +26,7 @@ func _ready() -> void:
 	health_bar.max_value = phase_zero_hp
 	health_bar.value = phase_zero_hp
 	new_direction = Vector2(randf_range(-1,1), randf_range(-1,1))
+	$sprite_player.play("boss_idle")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

@@ -1,13 +1,50 @@
-[gd_scene load_steps=12 format=3 uid="uid://dikeoabpjq6by"]
+[gd_scene load_steps=15 format=3 uid="uid://dikeoabpjq6by"]
 
 [ext_resource type="Script" path="res://Levels/DonkyBoss/last_boss.gd" id="1_nuvan"]
-[ext_resource type="PackedScene" uid="uid://cmmhkf4q42bqq" path="res://laser.tscn" id="2_2fk0o"]
+[ext_resource type="PackedScene" path="res://laser.tscn" id="2_2fk0o"]
 [ext_resource type="Texture2D" uid="uid://dknbkpwtbdkpq" path="res://Levels/DonkyBoss/donkey_idle spirtes.png" id="2_iq58e"]
 [ext_resource type="PackedScene" uid="uid://bt08jjajt7sro" path="res://Enemies/projectile_spawner.tscn" id="3_4face"]
 [ext_resource type="AudioStream" uid="uid://dvvuafkut0w1x" path="res://Sounds/Win.mp3" id="5_sj5y3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ddnps"]
 radius = 7.88456
+
+[sub_resource type="Animation" id="Animation_n2bnk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_0tgkd"]
+resource_name = "boss_idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BossSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.333333, 0.5, 0.666667, 0.833333, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 3, 1, 2, 1, 3, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o6urb"]
+_data = {
+"RESET": SubResource("Animation_n2bnk"),
+"boss_idle": SubResource("Animation_0tgkd")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l5clj"]
 
@@ -41,6 +78,7 @@ script = ExtResource("1_nuvan")
 projectile_scene = ExtResource("2_2fk0o")
 
 [node name="AttackHitbox" type="Area2D" parent="."]
+visible = false
 scale = Vector2(1.2, 1.28)
 collision_layer = 4
 
@@ -55,11 +93,18 @@ hframes = 4
 region_enabled = true
 region_rect = Rect2(0, 0, 256, 160)
 
+[node name="sprite_player" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_o6urb")
+}
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 scale = Vector2(5.28, 11.72)
 shape = SubResource("CircleShape2D_l5clj")
 
 [node name="HitboxArea" type="Area2D" parent="."]
+visible = false
 scale = Vector2(0.48, 1)
 collision_layer = 4
 collision_mask = 130
@@ -69,6 +114,7 @@ scale = Vector2(11.88, 11.44)
 shape = SubResource("CircleShape2D_sjsbu")
 
 [node name="DetectionArea" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]

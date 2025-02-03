@@ -18,7 +18,7 @@ position = Vector2(406, 215)
 texture = ExtResource("2_b0ohc")
 
 [node name="Punch" type="Sprite2D" parent="."]
-position = Vector2(755, 214)
+position = Vector2(880, 224)
 texture = ExtResource("3_xrigh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
