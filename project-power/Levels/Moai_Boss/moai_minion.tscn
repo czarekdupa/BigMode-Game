@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://die74adxassdo"]
 
 [ext_resource type="Script" path="res://Levels/Moai_Boss/moai_minion.gd" id="1_2qk7g"]
-[ext_resource type="Texture2D" uid="uid://bu5vqsakbb5bx" path="res://Levels/Moai_Boss/moai_minion_sprite.png" id="1_swsb3"]
+[ext_resource type="Texture2D" uid="uid://o7ywe0jl36y4" path="res://Levels/Moai_Boss/moai_minion_sprite2.png" id="2_he5j4"]
 [ext_resource type="Script" path="res://Levels/Moai_Boss/ray_cast_2d.gd" id="3_vea01"]
 [ext_resource type="AudioStream" uid="uid://c4ekon4pp3xbs" path="res://Sounds/hit-rock-02-266304.mp3" id="4_uvxwl"]
 
@@ -60,7 +60,7 @@ collision_layer = 4
 script = ExtResource("1_2qk7g")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_swsb3")
+texture = ExtResource("2_he5j4")
 hframes = 2
 vframes = 2
 region_enabled = true
