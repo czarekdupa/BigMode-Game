@@ -288,5 +288,47 @@ scale = Vector2(2, 2)
 position = Vector2(1152, 512)
 scale = Vector2(2, 2)
 
+[node name="moai_minion5" parent="moai_minions" node_paths=PackedStringArray("first_marker", "second_marker") instance=ExtResource("5_unwrb")]
+position = Vector2(896, -128)
+rotation = -1.5708
+first_marker = NodePath("../first_marker5")
+second_marker = NodePath("../second_marker5")
+
+[node name="first_marker5" type="Marker2D" parent="moai_minions"]
+position = Vector2(896, -128)
+scale = Vector2(2, 2)
+
+[node name="second_marker5" type="Marker2D" parent="moai_minions"]
+position = Vector2(896, 512)
+scale = Vector2(2, 2)
+
+[node name="moai_minion6" parent="moai_minions" node_paths=PackedStringArray("first_marker", "second_marker") instance=ExtResource("5_unwrb")]
+position = Vector2(256, -128)
+rotation = -1.5708
+first_marker = NodePath("../first_marker6")
+second_marker = NodePath("../second_marker6")
+
+[node name="first_marker6" type="Marker2D" parent="moai_minions"]
+position = Vector2(256, -128)
+scale = Vector2(4, 4)
+
+[node name="second_marker6" type="Marker2D" parent="moai_minions"]
+position = Vector2(256, 512)
+scale = Vector2(4, 4)
+
+[node name="moai_minion7" parent="moai_minions" node_paths=PackedStringArray("first_marker", "second_marker") instance=ExtResource("5_unwrb")]
+position = Vector2(0, -128)
+rotation = -1.5708
+first_marker = NodePath("../first_marker7")
+second_marker = NodePath("../second_marker7")
+
+[node name="first_marker7" type="Marker2D" parent="moai_minions"]
+position = Vector2(0, -128)
+scale = Vector2(8, 8)
+
+[node name="second_marker7" type="Marker2D" parent="moai_minions"]
+position = Vector2(0, 512)
+scale = Vector2(8, 8)
+
 [node name="player_upgrades_data" type="Node2D" parent="."]
 script = ExtResource("7_854vb")

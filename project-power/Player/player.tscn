@@ -789,6 +789,7 @@ grow_vertical = 2
 icon = ExtResource("9_rmx3t")
 
 [node name="Power_up_canvas" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="PowerUp" type="Sprite2D" parent="Power_up_canvas"]
 position = Vector2(589, 124)
